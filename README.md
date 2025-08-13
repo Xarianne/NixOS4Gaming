@@ -41,7 +41,7 @@ These are installed via the Chaotic Nyx repo (enabled in the flake): https://git
 
 Please note that when use rebuild, the sytem will create two snapshots: one with the base mesa drivers and one with the mesa-git drivers. So you can always choose what to use.
 
-If you don't want to us the CachyOS Kernel the configuraiton.nix file still has NixOS's own kernel. Uncomment the kernel you want to use:
+If you don't want to us the CachyOS Kernel the modules/gaming/gaming-optimizations.nix file still has NixOS's own kernel. Uncomment the kernel you want to use:
 
 ```nix
   # Use latest standard NixOS kernel, choose either this or the CachyOS one (below)
