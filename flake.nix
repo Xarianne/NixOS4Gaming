@@ -39,11 +39,11 @@
     let
       # Define your username here at the flake level
       # This is the single place to change it for this system
-      systemUsername = "username"; # <--- IMPORTANT: Change this line to your desired username
+      systemUsername = "xariann"; # <--- IMPORTANT: Change this line to your desired username
 
       # Define your hostname here at the flake level
       # This is the single place to change it for this system
-      systemHostname = "hostname"; # <--- IMPORTANT: Change this line to your desired hostname
+      systemHostname = "nixos"; # <--- IMPORTANT: Change this line to your desired hostname
     in
 
     {
@@ -54,8 +54,8 @@
           ./configuration.nix
 
           # Secure boot files
-          # ./modules/security/secure-boot.nix  <--- Turned off Lanzaboote for the first build as it can cause issues, turn back on after successful build if you want secure boot 
-          # lanzaboote.nixosModules.lanzaboote  <--- Turned off Lanzaboote for the first build as it can cause issues, turn back on after successful build if you want secure boot
+          ./modules/security/secure-boot.nix
+          lanzaboote.nixosModules.lanzaboote
 
           # Declarative flaptak config
           nix-flatpak.nixosModules.nix-flatpak
