@@ -1,6 +1,6 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# and in the NixOS manual (accessible by running 'nixos-help').
 
 {
   config,
@@ -14,10 +14,11 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix   # This is not included, use the one you generated during insall
-    ./modules/disks/automount.nix 
+    ./hardware-configuration.nix   # This is not included, use the one you generated during install
+    ./modules/disks/automount.nix
     ./modules/flatpak/flatpak-packages.nix
     ./modules/virtualisation/virtualisation.nix
+    ./modules/gaming/gaming-optimizations.nix  # All gaming optimizations are here
   ];
 
   # Enable flakes
@@ -31,20 +32,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
 
-  # Use latest standard NixOS kernel, choose either this or the CachyOS one (below)
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  # Use Cachy kernel (turned on by default)
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
-
-  # Turn on ntsync
-  boot.initrd.kernelModules = [ "ntsync" ];
-
   networking.hostName = systemHostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Mesa-git via ChaoticNyx
-  chaotic.mesa-git.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -122,7 +111,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.${systemUsername} = {
     isNormalUser = true;
     description = "${systemUsername}";
@@ -158,7 +147,6 @@
     sbctl
     fwupd
     kdePackages.partitionmanager
-    gamescope
   ];
 
   # Install firefox.
@@ -169,17 +157,6 @@
 
   # Enable Flatpak
   services.flatpak.enable = true;
-
-  programs.steam.enable = true;
-  # programs.steam.gamescopeSession.enable = true;  <-- This is the gamescope SESSION which you would start from the login screen. Currently disabled because it isn't fully set up, maybe in the future; gamescope is still included as a package and can be used via Steam by adding it as a launch option for games. Please see official gamescope documentaion: https://github.com/ValveSoftware/gamescope
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      rocmPackages.clr.icd
-    ];
-  };
 
   # Garbage Collection
   nix.gc = {
@@ -209,7 +186,7 @@
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It's perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
