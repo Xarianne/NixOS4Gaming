@@ -58,26 +58,25 @@ SECURE_BOOT=""
 CUSTOM_DNS=""
 VIRTUALIZATION=""
 
-read -p "Enter username for the gaming setup [$CURRENT_USER]: " INPUT_USERNAME
+read -p "Enter username for the gaming setup [$CURRENT_USER]: " INPUT_USERNAME < /dev/tty
 USERNAME=${INPUT_USERNAME:-$CURRENT_USER}
 
-read -p "Enter hostname for the gaming setup [$CURRENT_HOSTNAME]: " INPUT_HOSTNAME
+read -p "Enter hostname for the gaming setup [$CURRENT_HOSTNAME]: " INPUT_HOSTNAME < /dev/tty
 HOSTNAME=${INPUT_HOSTNAME:-$CURRENT_HOSTNAME}
 
 echo -e "${BLUE}This installer configures NixOS for AMD GPU gaming.${NC}"
-echo "For NVIDIA or Intel GPUs, please check the repository for other installers."
 
 # Optional features
 echo
 echo -e "${GREEN}Optional features:${NC}"
 
-read -p "Enable secure boot support? (y/N): " SECURE_BOOT
+read -p "Enable secure boot support? (y/N): " SECURE_BOOT < /dev/tty
 SECURE_BOOT=${SECURE_BOOT:-n}
 
-read -p "Enable custom DNS configuration? (y/N): " CUSTOM_DNS
+read -p "Enable custom DNS configuration? (y/N): " CUSTOM_DNS < /dev/tty
 CUSTOM_DNS=${CUSTOM_DNS:-n}
 
-read -p "Enable virtualization (QEMU/KVM)? (Y/n): " VIRTUALIZATION
+read -p "Enable virtualization (QEMU/KVM)? (Y/n): " VIRTUALIZATION < /dev/tty
 VIRTUALIZATION=${VIRTUALIZATION:-y}
 
 echo
@@ -90,7 +89,7 @@ echo "Custom DNS: $(echo $CUSTOM_DNS | tr '[:lower:]' '[:upper:]')"
 echo "Virtualization: $(echo $VIRTUALIZATION | tr '[:lower:]' '[:upper:]')"
 echo
 
-read -p "Continue with installation? (Y/n): " CONFIRM
+read -p "Continue with installation? (Y/n): " CONFIRM < /dev/tty
 CONFIRM=${CONFIRM:-y}
 
 if [[ ! $CONFIRM =~ ^[Yy]$ ]]; then
