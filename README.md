@@ -90,7 +90,12 @@ If you want to enable secure boot, please follow the tutorial in this link: http
           # ./modules/security/secure-boot.nix  <--- Turned off Lanzaboote for the first build as it can cause issues, turn back on after successful build if you want secure boot 
           # lanzaboote.nixosModules.lanzaboote  <--- Turned off Lanzaboote for the first build as it can cause issues, turn back on after successful build if you want secure boot
 ```
-
+### DNS Support
+I added DNS support but it's disabled by default. If you want to turn it on, go to configuration.nix and uncomment the dns module, under the network section of the imports:
+`# Network
+    ./modules/network/networking.nix
+    # ./modules/network/dns.nix  # Uncomment to use custom DNS`
+Then go to `modules/network/dns.nix` and adjust your dns settings to your liking. I have listed a few options.
 
 ### Automount Template
 This should be disk agnostic and will handle mounting drives automatically. If you don't want automount, delete the import in `configuration.nix` as well as the `modules/disks` folder. 
