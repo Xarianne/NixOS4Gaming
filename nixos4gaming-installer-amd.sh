@@ -92,7 +92,7 @@ echo
 read -p "Continue with installation? (Y/n): " CONFIRM < /dev/tty
 CONFIRM=${CONFIRM:-y}
 
-if [[ ! $CONFIRM =~ ^[Yy]$ ]]; then
+if [[ ! $CONFIRM =~ ^[Yy]$ ]] && [[ ! -z $CONFIRM ]]; then
     echo "Installation cancelled."
     exit 0
 fi
