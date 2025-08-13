@@ -56,6 +56,13 @@ echo
 # Get user input
 echo -e "${GREEN}Step 2: Configuration${NC}"
 
+# Initialize variables to avoid unbound variable errors
+USERNAME=""
+HOSTNAME=""
+SECURE_BOOT=""
+CUSTOM_DNS=""
+VIRTUALIZATION=""
+
 read -p "Enter username for the gaming setup [$CURRENT_USER]: " INPUT_USERNAME
 USERNAME=${INPUT_USERNAME:-$CURRENT_USER}
 
