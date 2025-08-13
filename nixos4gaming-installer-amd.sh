@@ -70,7 +70,7 @@ echo -e "${BLUE}This installer configures NixOS for AMD GPU gaming.${NC}"
 # Kernel selection
 echo
 echo -e "${GREEN}Kernel selection:${NC}"
-echo "1) Latest NixOS kernel (stable, faster build)"
+echo "1) Latest NixOS kernel (faster build)"
 echo "2) CachyOS kernel (gaming optimized, longer build time)"
 
 while true; do
@@ -105,7 +105,7 @@ echo -e "${YELLOW}Configuration Summary:${NC}"
 echo "Username: $USERNAME"
 echo "Hostname: $HOSTNAME"
 echo "GPU: AMD Radeon"
-echo "Kernel: $(if [[ $KERNEL_CHOICE == "2" ]]; then echo "CachyOS (gaming optimized)"; else echo "Latest NixOS (stable)"; fi)"
+echo "Kernel: $(if [[ $KERNEL_CHOICE == "2" ]]; then echo "CachyOS (gaming optimized)"; else echo "Latest NixOS"; fi)"
 echo "Custom DNS: $(echo $CUSTOM_DNS | tr '[:lower:]' '[:upper:]')"
 echo "Virtualization: $(echo $VIRTUALIZATION | tr '[:lower:]' '[:upper:]')"
 echo "DaVinci Resolve: $(echo $DAVINCI_RESOLVE | tr '[:lower:]' '[:upper:]')"
