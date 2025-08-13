@@ -54,16 +54,38 @@ echo -e "${GREEN}Step 2: Configuration${NC}"
 # Initialize variables to avoid unbound variable errors
 USERNAME=""
 HOSTNAME=""
+KERNEL_CHOICE=""
 CUSTOM_DNS=""
 VIRTUALIZATION=""
+DAVINCI_RESOLVE=""
 
-read -p "Enter username for the gaming setup [$CURRENT_USER]: " INPUT_USERNAME < /dev/tty
+read -p "Enter username for the gaming setup [detected: $CURRENT_USER]: " INPUT_USERNAME < /dev/tty
 USERNAME=${INPUT_USERNAME:-$CURRENT_USER}
 
-read -p "Enter hostname for the gaming setup [$CURRENT_HOSTNAME]: " INPUT_HOSTNAME < /dev/tty
+read -p "Enter hostname for the gaming setup [detected: $CURRENT_HOSTNAME]: " INPUT_HOSTNAME < /dev/tty
 HOSTNAME=${INPUT_HOSTNAME:-$CURRENT_HOSTNAME}
 
 echo -e "${BLUE}This installer configures NixOS for AMD GPU gaming.${NC}"
+
+# Kernel selection
+echo
+echo -e "${GREEN}Kernel selection:${NC}"
+echo "1) Latest NixOS kernel (stable, faster build)"
+echo "2) CachyOS kernel (gaming optimized, longer build time)"
+
+while true; do
+    read -p "Choose kernel (1-2) [default: 1]: " KERNEL_CHOICE < /dev/tty
+    KERNEL_CHOICE=${KERNEL_CHOICE:-1}
+    case $KERNEL_CHOICE in
+        1|2) break;;
+        *) echo "Please enter 1 or 2";;
+    esac
+done
+
+if [[ $KERNEL_CHOICE == "2" ]]; then
+    echo -e "${YELLOW}Warning: CachyOS kernel may take significantly longer to compile.${NC}"
+    echo "This kernel includes gaming-specific optimizations but requires building from source."
+fi
 
 # Optional features
 echo
@@ -75,13 +97,18 @@ CUSTOM_DNS=${CUSTOM_DNS:-n}
 read -p "Enable virtualization (QEMU/KVM)? (Y/n): " VIRTUALIZATION < /dev/tty
 VIRTUALIZATION=${VIRTUALIZATION:-y}
 
+read -p "Install DaVinci Resolve? (y/N): " DAVINCI_RESOLVE < /dev/tty
+DAVINCI_RESOLVE=${DAVINCI_RESOLVE:-n}
+
 echo
 echo -e "${YELLOW}Configuration Summary:${NC}"
 echo "Username: $USERNAME"
 echo "Hostname: $HOSTNAME"
 echo "GPU: AMD Radeon"
+echo "Kernel: $(if [[ $KERNEL_CHOICE == "2" ]]; then echo "CachyOS (gaming optimized)"; else echo "Latest NixOS (stable)"; fi)"
 echo "Custom DNS: $(echo $CUSTOM_DNS | tr '[:lower:]' '[:upper:]')"
 echo "Virtualization: $(echo $VIRTUALIZATION | tr '[:lower:]' '[:upper:]')"
+echo "DaVinci Resolve: $(echo $DAVINCI_RESOLVE | tr '[:lower:]' '[:upper:]')"
 echo
 
 read -p "Continue with installation? (Y/n): " CONFIRM < /dev/tty
@@ -144,6 +171,15 @@ echo "✓ Vulkan support"
 echo "✓ Hardware acceleration"
 echo "✓ Gaming optimizations"
 
+# Configure kernel choice
+if [[ $KERNEL_CHOICE == "1" ]]; then
+    echo "Configuring latest NixOS kernel..."
+    sudo sed -i 's|^\s*boot.kernelPackages = pkgs.linuxPackages_cachyos;|# &|' "$CONFIG_DIR/modules/gaming/gaming-optimizations.nix"
+    sudo sed -i 's|^\s*# boot.kernelPackages = pkgs.linuxPackages_latest;|boot.kernelPackages = pkgs.linuxPackages_latest;|' "$CONFIG_DIR/modules/gaming/gaming-optimizations.nix"
+else
+    echo "Keeping CachyOS kernel (default in config)..."
+fi
+
 echo
 echo -e "${GREEN}Step 6: Configuring optional features${NC}"
 
@@ -156,6 +192,12 @@ fi
 if [[ $VIRTUALIZATION =~ ^[Nn]$ ]]; then
     echo "Disabling virtualization..."
     sudo sed -i 's|^\s*./modules/virtualization|# &|' "$CONFIG_DIR/configuration.nix"
+fi
+
+if [[ $DAVINCI_RESOLVE =~ ^[Yy]$ ]]; then
+    echo "Adding DaVinci Resolve to configuration..."
+    # Add DaVinci Resolve to the packages list in configuration.nix
+    sudo sed -i '/environment.systemPackages = with pkgs; \[/a\    davinci-resolve' "$CONFIG_DIR/configuration.nix"
 fi
 
 # Preserve the original hardware-configuration.nix
