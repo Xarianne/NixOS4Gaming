@@ -4,12 +4,13 @@ These are my personal configuration files. I decided to share them in case other
 
 ## Quick Start
 
-1. Install NixOS using the graphical installer
-2. Clone/download these files to `/etc/nixos/`
-3. **IMPORTANT**: Edit `flake.nix` and change `systemUsername` and `systemHostname`
-4. Run: `sudo nixos-rebuild switch` (this enables flakes for the first time)
-5. From then on use: `nixos-rebuild switch --flake .#your-hostname`
-6. I don't provide the hardware-configuration.nix file, as it changes from system to system, keep yours from the original install
+1. Turn off Secure Boot if it's on (you will be given the tools to set it up later if you want to keep it, but the NixOS installer doesn't support it by default)
+2. Install NixOS using the graphical installer
+3. Clone/download these files to `/etc/nixos/`
+4. **IMPORTANT**: Edit `flake.nix` and change `systemUsername` and `systemHostname`
+5. Run: `sudo nixos-rebuild switch` (this enables flakes for the first time)
+6. From then on use: `nixos-rebuild switch --flake .#your-hostname`
+7. I don't provide the hardware-configuration.nix file, as it changes from system to system, keep yours from the original install
 
 **There are a few things to customize before you use these files, so read the full instructions below!**
 
