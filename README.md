@@ -67,9 +67,18 @@ If you wish to manage software that doesn't need to be installed system-wide in 
 Ntsync makes Windows games that use Proton run better on Linux. When Windows games need to coordinate different parts of the program they use special Windows-only features. Ntsync translates these features for Linux, making games run smoother with fewer crashes and glitches. Proton GE 10-10 or newer pick up Ntsync automatically if the ntsync module is on (which is why I turned it on). However bear in mind that just because a Proton version supports Ntsync, it doesn't mean it will peform better than one that doesn't, but which has other optimizations.
 
 ### Lanzaboote Secure Boot Setup
-I included sbctl, which is required to generate and sign your own keys, and lanzaboote, which is required to enable secure boot. If you want to enable secure boot, please follow the tutorial in this link: https://github.com/nix-community/lanzaboote 
+I included sbctl, which is required to generate and sign your own keys, and lanzaboote, which is required to enable secure boot. 
 
 **If you don't want secure boot**, then delete the lanzaboote references in `flake.nix` and remove the import `./modules/security/secure-boot.nix` from `configuration.nix`. Then delete the `modules/security` folder.
+
+If you want to enable secure boot, please follow the tutorial in this link: https://github.com/nix-community/lanzaboote. I commented out two lines in the flake.nix file so that Lanzaboote doesn't interfere with your first build as it can cause issues, but you can uncomment them when ready to follow the tutorial to activate it:
+
+```nix
+# Secure boot files
+          # ./modules/security/secure-boot.nix  <--- Turned off Lanzaboote for the first build as it can cause issues, turn back on after successful build if you want secure boot 
+          # lanzaboote.nixosModules.lanzaboote  <--- Turned off Lanzaboote for the first build as it can cause issues, turn back on after successful build if you want secure boot
+```
+
 
 ### Automount Template
 This should be disk agnostic and will handle mounting drives automatically. If you don't want automount, delete the import in `configuration.nix` as well as the `modules/disks` folder. 
