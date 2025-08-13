@@ -11,7 +11,7 @@ curl -sSL https://raw.githubusercontent.com/Xarianne/NixOS4Gaming/main/nixos4gam
 chmod +x installer.sh
 ./installer.sh
 ```
-After the installation, go to the **Lanzaboote Secure Boot Setup** section to either enable secure boot or delete the related set up files. That's it! Enjoy.
+After the installation, go to the **Lanzaboote Secure Boot Setup** section of this README to either enable secure boot or delete the related set up files. That's it! Enjoy.
 
 The rest of this guide is for information and manual installation if you prefer it (will update this README file to reflect the recent addition of the installer script).
 
