@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=System;
+Comment=Rebuilds the system from local configuration changes
+Exec=pkexec bash -c 'nixos-rebuild switch --flake /etc/nixos#nixos; read -p '\\''Press Enter to close...'\\'''
+Icon=nix
+Name=Rebuild NixOS System
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

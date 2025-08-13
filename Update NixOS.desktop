@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Update NixOS System
+Comment=Updates all flake inputs and then rebuilds the system
+Exec=pkexec bash -c "cd /etc/nixos && nix flake update && nixos-rebuild switch --flake .#nixos; read -p 'Press Enter to close...'"
+Icon=system-software-update
+Type=Application
+Terminal=true
+Categories=System;
