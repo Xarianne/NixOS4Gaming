@@ -132,7 +132,7 @@ While you can create aliases so you could just do it all in terminal, if you are
 
 ### Common Issues:
 - **Flake errors**: Make sure you've changed the username and hostname in `flake.nix`
-- **GPU issues**: This config is AMD-specific. For NVIDIA, you'll need to modify the graphics configuration
+- **GPU issues**: This config is AMD-specific. For NVIDIA, you'll need to modify the graphics configuration; as I have not had to do it myself I can't give you proper instructions; in the **That's it folks!** section below there is a video that has that information, but checking the NixOS documentation is your best bet
 - **Build failures**: Try `sudo nixos-rebuild switch --flake .#your-hostname --show-trace` for more detailed error messages
 
 ### Disabling Features You Don't Want:
