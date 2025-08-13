@@ -92,9 +92,11 @@ If you want to enable secure boot, please follow the tutorial in this link: http
 ```
 ### DNS Support
 I added DNS support but it's disabled by default. If you want to turn it on, go to configuration.nix and uncomment the dns module, under the network section of the imports:
-`# Network
+```nix
+  # Network
     ./modules/network/networking.nix
-    # ./modules/network/dns.nix  # Uncomment to use custom DNS`
+    # ./modules/network/dns.nix  # Uncomment to use custom DNS
+```
 Then go to `modules/network/dns.nix` and adjust your dns settings to your liking. I have listed a few options.
 
 ### Automount Template
