@@ -56,11 +56,11 @@ echo
 # Get user input
 echo -e "${GREEN}Step 2: Configuration${NC}"
 
-read -p "Enter username for the gaming setup [$CURRENT_USER]: " USERNAME
-USERNAME=${USERNAME:-$CURRENT_USER}
+read -p "Enter username for the gaming setup [$CURRENT_USER]: " INPUT_USERNAME
+USERNAME=${INPUT_USERNAME:-$CURRENT_USER}
 
-read -p "Enter hostname for the gaming setup [$CURRENT_HOSTNAME]: " HOSTNAME
-HOSTNAME=${HOSTNAME:-$CURRENT_HOSTNAME}
+read -p "Enter hostname for the gaming setup [$CURRENT_HOSTNAME]: " INPUT_HOSTNAME
+HOSTNAME=${INPUT_HOSTNAME:-$CURRENT_HOSTNAME}
 
 echo -e "${BLUE}This installer configures NixOS for AMD GPU gaming.${NC}"
 echo "For NVIDIA or Intel GPUs, please check the repository for other installers."
@@ -139,7 +139,7 @@ echo -e "${GREEN}Step 5: Configuring for AMD GPU${NC}"
 
 echo "Configuring AMD Radeon graphics..."
 echo "✓ Mesa drivers (including mesa-git from Chaotic Nyx)"
-echo "✓ Vulkan support"
+echo "✓ Vulkan support"  
 echo "✓ Hardware acceleration"
 echo "✓ Gaming optimizations"
 
@@ -211,7 +211,7 @@ echo "4. Install MangoHud overlay for performance monitoring"
 echo
 echo -e "${YELLOW}Useful commands:${NC}"
 echo "• Update system: sudo nixos-rebuild switch --flake .#$HOSTNAME"
-echo "• Update packages: nix flake update && sudo nixos-rebuild switch --flake .#$HOSTNAME"
+echo "• Update packages: nix flake update && sudo nixos-rebuild switch --flake .#$HOSTNAME"  
 echo "• Rollback if needed: sudo nixos-rebuild switch --rollback"
 echo
 echo -e "${YELLOW}Configuration files location:${NC}"
