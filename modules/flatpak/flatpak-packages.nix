@@ -1,6 +1,10 @@
 # /etc/nixos/modules/flatpak-packages.nix
 { config, pkgs, ... }:
 
+# Enable Flatpak support
+services.flatpak.enable = true;
+
+# Declaratively manage Flatpak packages
 {
   services.flatpak.packages = [
     {
