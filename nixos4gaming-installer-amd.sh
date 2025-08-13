@@ -14,10 +14,6 @@ REPO_URL="https://github.com/Xarianne/NixOS4Gaming.git"
 CONFIG_DIR="/etc/nixos"
 BACKUP_DIR="/etc/nixos/backup-$(date +%Y%m%d-%H%M%S)"
 
-# Customize flake.nix
-echo "Updating flake.nix with your settings..."
-sudo sed -i "s/your-username/$USERNAME/g" "$CONFIG_DIR/flake.nix"
-sudo sed -i "s/your-hostname/$HOSTNAME/g" "$CONFIG_DIR/flake.nix"
 echo -e "${BLUE}======================================${NC}"
 echo -e "${BLUE}    NixOS4Gaming Installer (AMD)      ${NC}"
 echo -e "${BLUE}======================================${NC}"
@@ -53,7 +49,6 @@ echo "Current user: $CURRENT_USER"
 echo "Current hostname: $CURRENT_HOSTNAME"
 echo
 
-# Get user input
 echo -e "${GREEN}Step 2: Configuration${NC}"
 
 # Initialize variables to avoid unbound variable errors
@@ -142,13 +137,21 @@ nix-shell -p git --run "
 "
 
 echo
-echo -e "${GREEN}Step 5: Configuring for AMD GPU${NC}"
+echo -e "${GREEN}Step 5: Customizing configuration${NC}"
 
-echo "Configuring AMD Radeon graphics..."
+# Customize flake.nix with user settings
+echo "Updating flake.nix with your settings..."
+sudo sed -i "s/your-username/$USERNAME/g" "$CONFIG_DIR/flake.nix"
+sudo sed -i "s/your-hostname/$HOSTNAME/g" "$CONFIG_DIR/flake.nix"
+
+echo "Configuring for AMD Radeon graphics..."
 echo "✓ Mesa drivers (including mesa-git from Chaotic Nyx)"
 echo "✓ Vulkan support"  
 echo "✓ Hardware acceleration"
 echo "✓ Gaming optimizations"
+
+echo
+echo -e "${GREEN}Step 6: Configuring optional features${NC}"
 
 # Handle optional features
 if [[ $SECURE_BOOT =~ ^[Nn]$ ]]; then
@@ -174,7 +177,7 @@ if [[ -f "$BACKUP_DIR/hardware-configuration.nix" ]]; then
 fi
 
 echo
-echo -e "${GREEN}Step 6: Configuring optional features${NC}"
+echo -e "${GREEN}Step 7: First rebuild (enabling flakes)${NC}"
 echo "This may take a while as it downloads packages..."
 echo
 
@@ -188,7 +191,7 @@ else
 fi
 
 echo
-echo -e "${GREEN}Step 7: First rebuild (enabling flakes)${NC}"
+echo -e "${GREEN}Step 8: Final rebuild with gaming configuration${NC}"
 echo "Applying full gaming configuration..."
 echo
 
@@ -204,7 +207,7 @@ else
 fi
 
 echo
-echo -e "${GREEN}Step 8: Final rebuild with gaming configuration${NC}"
+echo -e "${BLUE}======================================${NC}"
 echo -e "${GREEN}    Installation Complete!            ${NC}"
 echo -e "${BLUE}======================================${NC}"
 echo
