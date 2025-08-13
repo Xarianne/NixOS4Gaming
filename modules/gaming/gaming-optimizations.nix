@@ -2,8 +2,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Gaming kernel - CachyOS for optimized performance
-  # Alternative: boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Use latest standard NixOS kernel, choose either this or the CachyOS one (below)
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Use Cachy kernel (turned on by default)
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   # Enable ntsync - helps Windows games work properly on Linux by fixing
