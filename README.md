@@ -2,6 +2,19 @@
 
 These are my personal configuration files. I decided to share them in case other people want a jump-start for their own gaming machine. As I am new to NixOS, this might not be the most efficient code you have ever seen, but the setup works. Feel free to tweak it for your own use. I use KDE so bear this in mind.
 
+## Installation
+
+Download and run the installer:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/Xarianne/NixOS4Gaming/main/nixos4gaming-installer-amd.sh -o installer.sh
+chmod +x installer.sh
+./installer.sh
+```
+After the installation, go to the **Lanzaboote Secure Boot Setup** section to either enable secure boot or delete the related set up files. That's it! Enjoy.
+
+The rest of this guide is for information and manual installation if you prefer it (will update this README file to reflect the recent addition of the installer script).
+
 ## Quick Start
 
 1. Turn off Secure Boot if it's on (you will be given the tools to set it up later if you want to keep it, but the NixOS installer doesn't support it by default)
