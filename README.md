@@ -37,7 +37,15 @@ Note: The default hostname when you install is usually "nixos", but if you chang
 
 ### Mesa-Git Drivers and the CachyOS Kernel
 These are installed via the Chaotic Nyx repo (enabled in the flake): https://github.com/chaotic-cx/nyx
-If you don't want to us the CachyOS Kernel the configuraiton.nix file still has the 
+If you don't want to us the CachyOS Kernel the configuraiton.nix file still has NixOS's own kernel. Uncomment the kernel you want to use:
+
+```nix
+  # Use latest standard NixOS kernel, choose either this or the CachyOS one (below)
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Use Cachy kernel (turned on by default)
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+```
 
 ### Declarative Flatpak Setup
 If you just enable Flatpaks in NixOS you will have to install them as you would in any other distro, which is not a declarative way of doing it. However, thanks to gmodena we can install Flatpaks declaratively: https://github.com/gmodena/nix-flatpak
