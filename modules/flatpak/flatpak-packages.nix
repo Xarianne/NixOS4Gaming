@@ -12,7 +12,6 @@
     "com.github.tchx84.Flatseal"
     "io.github.flattool.Warehouse"
     "com.vysp3r.ProtonPlus"
-    "net.lutris.Lutris"
     "io.github.radiolamp.mangojuice"
 
   ];
