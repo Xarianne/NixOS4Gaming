@@ -54,8 +54,8 @@
           ./configuration.nix
 
           # Secure boot files
-          ./modules/security/secure-boot.nix
-          lanzaboote.nixosModules.lanzaboote
+          # ./modules/security/secure-boot.nix  <--- Turned off Lanzaboote for the first build as it can cause issues, turn back on after successful build if you want secure boot 
+          # lanzaboote.nixosModules.lanzaboote  <--- Turned off Lanzaboote for the first build as it can cause issues, turn back on after successful build if you want secure boot
 
           # Declarative flaptak config
           nix-flatpak.nixosModules.nix-flatpak
