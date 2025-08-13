@@ -54,7 +54,6 @@ echo -e "${GREEN}Step 2: Configuration${NC}"
 # Initialize variables to avoid unbound variable errors
 USERNAME=""
 HOSTNAME=""
-SECURE_BOOT=""
 CUSTOM_DNS=""
 VIRTUALIZATION=""
 
@@ -70,9 +69,6 @@ echo -e "${BLUE}This installer configures NixOS for AMD GPU gaming.${NC}"
 echo
 echo -e "${GREEN}Optional features:${NC}"
 
-read -p "Enable secure boot support? (y/N): " SECURE_BOOT < /dev/tty
-SECURE_BOOT=${SECURE_BOOT:-n}
-
 read -p "Enable custom DNS configuration? (y/N): " CUSTOM_DNS < /dev/tty
 CUSTOM_DNS=${CUSTOM_DNS:-n}
 
@@ -84,7 +80,6 @@ echo -e "${YELLOW}Configuration Summary:${NC}"
 echo "Username: $USERNAME"
 echo "Hostname: $HOSTNAME"
 echo "GPU: AMD Radeon"
-echo "Secure Boot: $(echo $SECURE_BOOT | tr '[:lower:]' '[:upper:]')"
 echo "Custom DNS: $(echo $CUSTOM_DNS | tr '[:lower:]' '[:upper:]')"
 echo "Virtualization: $(echo $VIRTUALIZATION | tr '[:lower:]' '[:upper:]')"
 echo
@@ -153,12 +148,6 @@ echo
 echo -e "${GREEN}Step 6: Configuring optional features${NC}"
 
 # Handle optional features
-if [[ $SECURE_BOOT =~ ^[Nn]$ ]]; then
-    echo "Disabling secure boot configuration..."
-    sudo sed -i 's|^\s*./modules/security/secure-boot.nix|# &|' "$CONFIG_DIR/configuration.nix"
-    sudo sed -i 's|^\s*lanzaboote.nixosModules.lanzaboote|# &|' "$CONFIG_DIR/flake.nix"
-fi
-
 if [[ $CUSTOM_DNS =~ ^[Yy]$ ]]; then
     echo "Enabling custom DNS configuration..."
     sudo sed -i 's|^\s*# ./modules/network/dns.nix|./modules/network/dns.nix|' "$CONFIG_DIR/configuration.nix"
