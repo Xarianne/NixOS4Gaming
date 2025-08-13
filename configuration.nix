@@ -29,7 +29,7 @@
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 10;
 
   # Use latest standard NixOS kernel, choose either this or the CachyOS one (below)
   # boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -158,6 +158,7 @@
     sbctl
     fwupd
     kdePackages.partitionmanager
+    gamescope
   ];
 
   # Install firefox.
@@ -170,7 +171,7 @@
   services.flatpak.enable = true;
 
   programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
+  # programs.steam.gamescopeSession.enable = true;  <-- This is the gamescope SESSION which you would start from the login screen. Currently disabled because it isn't fully set up, maybe in the future; gamescope is still included as a package and can be used via Steam by adding it as a launch option for games. Please see official gamescope documentaion: https://github.com/ValveSoftware/gamescope
 
   hardware.graphics = {
     enable = true;
