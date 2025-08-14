@@ -165,9 +165,12 @@ else
 fi
 
 # Handle optional features
+# Handle virtualization choice
 if [[ $VIRTUALIZATION =~ ^[Nn]$ ]]; then
     echo "Disabling virtualization..."
     sudo sed -i 's|^\s*./modules/virtualisation/virtualisation.nix|# &|' "$CONFIG_DIR/configuration.nix"
+else
+    echo "Keeping virtualization enabled..."
 fi
 
 if [[ $DAVINCI_RESOLVE =~ ^[Nn]$ ]] || [[ -z $DAVINCI_RESOLVE ]]; then
@@ -223,8 +226,8 @@ else
     echo -e "${YELLOW}Build failed with exit code: $EXIT_CODE${NC}"
     echo
     echo -e "${YELLOW}This is likely due to:${NC}"
-    echo "• Network issues while downloading packages"
     echo "• Long build time (this is normal on first run)"
+    echo "• Network issues while downloading packages"
     echo "• Missing dependencies or build errors"
     echo
     echo -e "${YELLOW}To resolve:${NC}"
@@ -244,8 +247,8 @@ echo "Your NixOS gaming system is ready!"
 echo
 echo -e "${YELLOW}Next steps:${NC}"
 echo "1. Reboot your system using the terminal command below"
-echo "   (Don't use KDE's reboot button for this first reboot - use the terminal for a clean restart"
-echo "   After this initial reboot, you can use KDE's reboot button normally)"
+echo "   (Don't use KDE's reboot button for this first reboot - use the terminal for a clean restart)"
+echo "   (After this initial reboot, you can use KDE's reboot button normally)"
 echo "2. Launch Steam and log in to your account"
 echo "3. Enjoy gaming on NixOS!"
 echo
