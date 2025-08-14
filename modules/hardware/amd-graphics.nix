@@ -11,7 +11,6 @@
     extraPackages = with pkgs; [
       # Add ROCm compute libraries for DaVinci Resolve
       rocmPackages.clr.icd
-      rocmPackages.rocm-runtime
     ];
   };
 }
