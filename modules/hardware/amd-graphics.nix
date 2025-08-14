@@ -10,7 +10,14 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
+      # Add ROCm compute libraries for DaVinci Resolve
       rocmPackages.clr.icd
+      rocmPackages.rocm-runtime
+      rocmPackages.rocblas
+      rocmPackages.rocsparse
+      rocmPackages.rocsolver
+      rocmPackages.rocfft
+      rocmPackages.miopen
     ];
   };
 }
