@@ -3,7 +3,7 @@
 These are my personal configuration files. I decided to share them in case other people want a jump-start for their own gaming machine. As I am new to NixOS, this might not be the most efficient code you have ever seen, but the setup works. Feel free to tweak it for your own use. I use KDE so bear this in mind. 
 
 ## Automatic installation
-If you are the trusting type I have created an installation script that will install the files for you. It will also ask you with kernel to use (CachyOS or the latest Kernel), whether you want DaVinci resolve and whether you want Virtualization to be turned on. Not everyone needs DaVinci and if your PC does not support virtualization then it will be pointless to install it. The script is in this repo so you can inspect it. To use it:
+If you are the trusting type I have created an installation script that will install the files for you. It will also ask you which kernel to use (CachyOS or the latest Kernel), whether you want DaVinci resolve and whether you want Virtualization to be turned on. Not everyone needs DaVinci and if your PC does not support virtualization then it will be pointless to install it. The script is in this repo so you can inspect it. To use it:
 
 1. Turn off Secure Boot if it's on (you will be given the tools to set it up later if you want to keep it, but the NixOS installer doesn't support it by default)
 2. Install NixOS using the graphical installer
