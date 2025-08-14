@@ -179,11 +179,6 @@ echo
 echo -e "${GREEN}Step 6: Configuring optional features${NC}"
 
 # Handle optional features
-if [[ $CUSTOM_DNS =~ ^[Yy]$ ]]; then
-    echo "Enabling custom DNS configuration..."
-    sudo sed -i 's|^\s*# ./modules/network/dns.nix|./modules/network/dns.nix|' "$CONFIG_DIR/configuration.nix"
-fi
-
 if [[ $VIRTUALIZATION =~ ^[Nn]$ ]]; then
     echo "Disabling virtualization..."
     sudo sed -i 's|^\s*./modules/virtualisation/virtualisation.nix|# &|' "$CONFIG_DIR/configuration.nix"
