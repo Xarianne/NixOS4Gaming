@@ -2,7 +2,7 @@
 { config, pkgs, lib, ... }:
 {
   # Mesa-git drivers - bleeding edge graphics drivers for AMD
-  # chaotic.mesa-git.enable = true;
+  # chaotic.mesa-git.enable = true;  # <----- uncomment this line if you want mesa-git
   
   # Graphics configuration for AMD
   hardware.graphics = {
