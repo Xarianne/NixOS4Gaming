@@ -54,8 +54,8 @@
           ./configuration.nix
 
           # Secure boot files
-          ./modules/security/secure-boot.nix
-          lanzaboote.nixosModules.lanzaboote
+          # ./modules/security/secure-boot.nix
+          # lanzaboote.nixosModules.lanzaboote
 
           # Declarative flaptak config
           nix-flatpak.nixosModules.nix-flatpak
