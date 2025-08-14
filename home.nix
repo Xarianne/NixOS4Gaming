@@ -23,6 +23,8 @@
     mangohud
     kdePackages.qtstyleplugin-kvantum
     goverlay
+    input-remapper  # Universal input device remapping
+    antimicrox      # Gaming-focused controller mapping
   ];
 
   # Example: Manage a dotfile (e.g., ~/.config/nvim/init.vim)
