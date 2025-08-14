@@ -142,12 +142,12 @@ To change automounting behaviour please see the **Automount template** section.
 ### Mesa-Git Drivers and the CachyOS Kernel
 These are installed via the Chaotic Nyx repo (enabled in the flake): https://github.com/chaotic-cx/nyx
 
-Please note that when rebuilding the sytem will create two snapshots: one with the base mesa drivers and one with the bleeding edge mesa-git drivers. So you can always choose what to use. The mesa-git drivers can sometimes cause DaVinci Resolve to complain about your graphics card. You have two choices: you can load the snapshot with the base mesa when you want to use DaVinci Resolve, or you can decide to turn off mesa-git entirely. To do so you can go to the modules/hardware/amd-graphics.nix and comment out the mesa-git line: 
+Please note that when rebuilding the sytem will create two snapshots: one with the base mesa drivers and one with the bleeding edge mesa-git drivers. So you can always choose what to use. The mesa-git drivers can sometimes cause DaVinci Resolve to complain about your graphics card. You have two choices: you can load the snapshot with the base mesa when you want to use DaVinci Resolve and then swap back to mesa-git when you are done, or you can decide to turn off mesa-git entirely. The installer will ask you if you want to install mesa-git in the first place. If you are not using the installer, you can go to the modules/hardware/amd-graphics.nix and uncomment the mesa-git line to turn it on:
 
 ```nix
   # Mesa-git drivers - bleeding edge graphics drivers for AMD
   # Provides performance improvements for newer AMD GPUs (especially RDNA 4)
-  chaotic.mesa-git.enable = true;   # <----- comment out this line if you want to turn it off
+  # chaotic.mesa-git.enable = true;   # <----- uncomment this line if you want mesa-git
 ```  
 
 If you don't want to us the CachyOS Kernel the modules/gaming/gaming-optimizations.nix file still has NixOS's own kernel. Uncomment the kernel you want to use:
