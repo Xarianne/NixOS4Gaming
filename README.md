@@ -14,7 +14,7 @@ curl -sSL https://raw.githubusercontent.com/Xarianne/NixOS4Gaming/main/nixos4gam
 chmod +x installer.sh 
 ./installer.sh
 ```
-This will download the script, then make it executable and run it. Once you have installed everything, you want to type `reboot` in your terminal, if rebooting from the KDE button doesn't work. I have not been able to figure out why this happens yet, regardless of whether I add the configuration manually or via the installer. You will only need to reboot from terminal the first time, then it will work as intended.
+This will download the script, then make it executable and run it. Once you have installed everything, you want to type `reboot` in your terminal, if rebooting from the KDE button doesn't work. I have not been able to figure out why this happens yet, regardless of whether I add the configuration manually or via the installer. You will only need to reboot from terminal the first time, then it will work as intended from KDE.
 
 The script will then automate the steps below in the manual installation but it will leave Lanzaboote inactive. If you want to activate secure boot, please follow the instructions in the section below. Do it after you completed the installation and you switched to your new build.
 
