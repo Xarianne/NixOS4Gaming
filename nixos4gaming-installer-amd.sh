@@ -59,6 +59,16 @@ DAVINCI_RESOLVE=""
 
 echo -e "${BLUE}This installer configures NixOS for AMD GPU gaming.${NC}"
 
+# Kernel choice
+echo
+echo -e "${GREEN}Kernel selection:${NC}"
+echo "1. CachyOS Kernel (gaming kernel)"
+echo "2. Latest NixOS Kernel (standard - may make the update faster)"
+echo
+
+read -p "Choose kernel (1 for CachyOS, 2 for NixOS): " KERNEL_CHOICE < /dev/tty
+KERNEL_CHOICE=${KERNEL_CHOICE:-1}
+
 # Optional features
 echo
 echo -e "${GREEN}Optional features:${NC}"
@@ -74,7 +84,11 @@ echo -e "${YELLOW}Configuration Summary:${NC}"
 echo "Username: $USERNAME"
 echo "Hostname: $HOSTNAME"
 echo "GPU: AMD Radeon"
-
+if [[ $KERNEL_CHOICE == "1" ]]; then
+    echo "Kernel: CachyOS (gaming optimized)"
+else
+    echo "Kernel: Latest NixOS (standard)"
+fi
 echo "Virtualization: $(echo $VIRTUALIZATION | tr '[:lower:]' '[:upper:]')"
 echo
 
@@ -140,6 +154,15 @@ echo "✓ Gaming optimizations"
 
 echo
 echo -e "${GREEN}Step 6: Configuring optional features${NC}"
+
+# Handle kernel choice
+if [[ $KERNEL_CHOICE == "2" ]]; then
+    echo "Configuring for NixOS kernel..."
+    sudo sed -i 's|^\s*boot.kernelPackages = pkgs.linuxPackages_cachyos;|# &|' "$CONFIG_DIR/modules/gaming/gaming-optimizations.nix"
+    sudo sed -i 's|^\s*# boot.kernelPackages = pkgs.linuxPackages_latest;|boot.kernelPackages = pkgs.linuxPackages_latest;|' "$CONFIG_DIR/modules/gaming/gaming-optimizations.nix"
+else
+    echo "Using CachyOS kernel (default)..."
+fi
 
 # Handle optional features
 if [[ $VIRTUALIZATION =~ ^[Nn]$ ]]; then
