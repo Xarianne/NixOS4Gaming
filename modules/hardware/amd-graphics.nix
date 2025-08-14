@@ -2,14 +2,14 @@
 { config, pkgs, lib, ... }:
 {
   # Mesa-git drivers - bleeding edge graphics drivers for AMD
-  # Provides performance improvements for newer AMD GPUs (especially RDNA 3/4)
-  chaotic.mesa-git.enable = true;
+  # chaotic.mesa-git.enable = true;  # <----- uncomment this line if you want mesa-git
   
   # Graphics configuration for AMD
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
+      # Add ROCm compute libraries for DaVinci Resolve
       rocmPackages.clr.icd
     ];
   };
