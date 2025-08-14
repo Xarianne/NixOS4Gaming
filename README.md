@@ -49,6 +49,8 @@ The script will then automate the steps below in the manual installation but it 
 
 Please note that installing everything in this configuration will make your first build rather long. The CachyOS kernel especially will have to be compiled. It will be much faster the next time you build switch, unless you compile a whole new kernel again.
 
+Mesa-git can cause problems for DaVinci Resolve. Please check the section **Mesa-Git Drivers and the CachyOS Kernel**. 
+
 After you installed everything, if you want easy buttons for updates to your system please see the section **Desktop Icons for Easy Updates**.
 
 ### Lanzaboote Secure Boot Setup
@@ -140,7 +142,13 @@ To change automounting behaviour please see the **Automount template** section.
 ### Mesa-Git Drivers and the CachyOS Kernel
 These are installed via the Chaotic Nyx repo (enabled in the flake): https://github.com/chaotic-cx/nyx
 
-Please note that when rebuilding the sytem will create two snapshots: one with the base mesa drivers and one with the bleeding edge mesa-git drivers. So you can always choose what to use.
+Please note that when rebuilding the sytem will create two snapshots: one with the base mesa drivers and one with the bleeding edge mesa-git drivers. So you can always choose what to use. The mesa-git drivers can sometimes cause DaVinci Resolve to complain about your graphics card. You have two choices: you can load the snapshot with the base mesa when you want to use DaVinci Resolve, or you can decide to turn off mesa-git entirely. To do so you can go to the modules/hardware/amd-graphics.nix and comment out the mesa-git line: 
+
+```nix
+  # Mesa-git drivers - bleeding edge graphics drivers for AMD
+  # Provides performance improvements for newer AMD GPUs (especially RDNA 4)
+  chaotic.mesa-git.enable = true;   # <----- comment out this line if you want to turn it off
+```  
 
 If you don't want to us the CachyOS Kernel the modules/gaming/gaming-optimizations.nix file still has NixOS's own kernel. Uncomment the kernel you want to use:
 
