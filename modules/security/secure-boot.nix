@@ -1,4 +1,5 @@
 # /etc/nixos/modules/security/secure-boot.nix
+# Delete this entire file if secure boot is unwanted
 { pkgs, lib, ... }:
 
 {
