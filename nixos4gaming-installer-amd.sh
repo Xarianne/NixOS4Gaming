@@ -62,7 +62,7 @@ echo -e "${BLUE}This installer configures NixOS for AMD GPU gaming.${NC}"
 # Kernel choice
 echo
 echo -e "${GREEN}Kernel selection:${NC}"
-echo "1. CachyOS Kernel (gaming kernel)"
+echo "1. CachyOS Kernel (recommended for gaming, default)"
 echo "2. Latest NixOS Kernel (standard - may make the update faster)"
 echo
 
@@ -170,10 +170,12 @@ if [[ $VIRTUALIZATION =~ ^[Nn]$ ]]; then
     sudo sed -i 's|^\s*./modules/virtualisation/virtualisation.nix|# &|' "$CONFIG_DIR/configuration.nix"
 fi
 
-if [[ $DAVINCI_RESOLVE =~ ^[Yy]$ ]]; then
-    echo "Adding DaVinci Resolve to configuration..."
-    # Add DaVinci Resolve to home.nix packages
-    sudo sed -i '/home.packages = with pkgs; \[/a\    davinci-resolve' "$CONFIG_DIR/home.nix"
+if [[ $DAVINCI_RESOLVE =~ ^[Nn]$ ]] || [[ -z $DAVINCI_RESOLVE ]]; then
+    echo "Removing DaVinci Resolve from configuration..."
+    # Remove or comment out DaVinci Resolve from home.nix packages
+    sudo sed -i 's|^\s*davinci-resolve|    # davinci-resolve|' "$CONFIG_DIR/home.nix"
+else
+    echo "Keeping DaVinci Resolve in configuration..."
 fi
 
 # Preserve the original hardware-configuration.nix
