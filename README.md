@@ -7,7 +7,7 @@ If you are the trusting type I have created an installation script that will ins
 
 1. Turn off Secure Boot if it's on (you will be given the tools to set it up later if you want to keep it, but the NixOS installer doesn't support it by default)
 2. Install NixOS using the graphical installer
-3. Run the installer:
+3. Run my installer script:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/Xarianne/NixOS4Gaming/main/nixos4gaming-installer-amd.sh -o installer.sh
