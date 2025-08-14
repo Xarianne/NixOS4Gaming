@@ -243,9 +243,14 @@ echo
 echo "Your NixOS gaming system is ready!"
 echo
 echo -e "${YELLOW}Next steps:${NC}"
-echo "1. Reboot your system to ensure all changes take effect"
+echo "1. Reboot your system using the terminal command below"
+echo "   (Don't use KDE's reboot button for this first reboot - use the terminal for a clean restart"
+echo "   After this initial reboot, you can use KDE's reboot button normally)"
 echo "2. Launch Steam and log in to your account"
 echo "3. Enjoy gaming on NixOS!"
+echo
+echo -e "${GREEN}To reboot properly after installation:${NC}"
+echo "sudo reboot"
 echo
 echo -e "${YELLOW}Useful commands:${NC}"
 echo "• Update system: sudo nixos-rebuild switch --flake .#$HOSTNAME"
