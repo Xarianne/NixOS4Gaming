@@ -105,7 +105,7 @@ To activate secure boot, please see the section **Lanzaboote Secure Boot Setup**
 ### Mesa-Git Drivers and the CachyOS Kernel
 These are installed via the Chaotic Nyx repo (enabled in the flake): https://github.com/chaotic-cx/nyx
 
-Please note that when use rebuild, the sytem will create two snapshots: one with the base mesa drivers and one with the mesa-git drivers. So you can always choose what to use.
+Please note that when rebuilding the sytem will create two snapshots: one with the base mesa drivers and one with the bleeding edge mesa-git drivers. So you can always choose what to use.
 
 If you don't want to us the CachyOS Kernel the modules/gaming/gaming-optimizations.nix file still has NixOS's own kernel. Uncomment the kernel you want to use:
 
