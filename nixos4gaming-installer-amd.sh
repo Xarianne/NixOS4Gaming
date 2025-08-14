@@ -172,7 +172,7 @@ fi
 
 if [[ $DAVINCI_RESOLVE =~ ^[Nn]$ ]] || [[ -z $DAVINCI_RESOLVE ]]; then
     echo "Removing DaVinci Resolve from configuration..."
-    # Remove or comment out DaVinci Resolve from home.nix packages
+    # Comment out DaVinci Resolve from home.nix packages
     sudo sed -i 's|^\s*davinci-resolve|    # davinci-resolve|' "$CONFIG_DIR/home.nix"
 else
     echo "Keeping DaVinci Resolve in configuration..."
