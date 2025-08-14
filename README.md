@@ -2,6 +2,35 @@
 
 These are my personal configuration files. I decided to share them in case other people want a jump-start for their own gaming machine. As I am new to NixOS, this might not be the most efficient code you have ever seen, but the setup works. Feel free to tweak it for your own use. I use KDE so bear this in mind. 
 
+# Table of Contents
+
+- [Automatic Installation](#automatic-installation)
+  - [Lanzaboote Secure Boot Setup](#lanzaboote-secure-boot-setup)
+  - [Automount Template](#automount-template)
+- [Manual Installation](#manual-installation)
+  - [Quick Start](#quick-start)
+  - [Initial Setup Instructions](#initial-setup-instructions)
+    - [IMPORTANT: Again, please change your username and hostname in flake.nix!](#important-again-please-change-your-username-and-hostname-in-flakenix)
+    - [Building your system](#building-your-system)
+- [What's Included](#whats-included)
+  - [Gaming Packages](#gaming-packages)
+  - [Mesa-Git Drivers and the CachyOS Kernel](#mesa-git-drivers-and-the-cachyos-kernel)
+  - [Declarative Flatpak Setup](#declarative-flatpak-setup)
+  - [OBS and DaVinci Resolve](#obs-and-davinci-resolve)
+  - [Other Packages](#other-packages)
+- [Other Features](#other-features)
+  - [Flake-Enabled](#flake-enabled)
+  - [Unstable Channel](#unstable-channel)
+  - [Home Manager](#home-manager)
+  - [Ntsync on](#ntsync-on)
+  - [Virtualization and Virtual Machine Manager](#virtualization-and-virtual-machine-manager)
+  - [Desktop Icons for Easy Updates](#desktop-icons-for-easy-updates)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+  - [Disabling Features You Don't Want](#disabling-features-you-dont-want)
+- [That's It Folks!](#thats-it-folks)
+- [Alternatives](#alternatives)
+
 ## Automatic installation
 If you are the trusting type I have created an installation script that will install the files for you. It will also ask you which kernel to use (CachyOS or the latest NixOS Kernel), whether you want DaVinci Resolve and whether you want virtualization to be turned on. Not everyone needs DaVinci and if your PC does not support virtualization then it will be pointless to install it. The script is in this repo so you can inspect it. To use it:
 
