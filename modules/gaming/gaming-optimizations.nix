@@ -1,3 +1,4 @@
+# /etc/nixos/modules/gaming/gaming-optimizations.nix
 { config, pkgs, lib, ... }:
 {
   # Use latest standard NixOS kernel, choose either this or the CachyOS one (below)
