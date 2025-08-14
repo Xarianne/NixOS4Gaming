@@ -191,19 +191,32 @@ fi
 
 if [[ $VIRTUALIZATION =~ ^[Nn]$ ]]; then
     echo "Disabling virtualization..."
-    sudo sed -i 's|^\s*./modules/virtualization|# &|' "$CONFIG_DIR/configuration.nix"
+    sudo sed -i 's|^\s*./modules/virtualisation/virtualisation.nix|# &|' "$CONFIG_DIR/configuration.nix"
 fi
 
 if [[ $DAVINCI_RESOLVE =~ ^[Yy]$ ]]; then
     echo "Adding DaVinci Resolve to configuration..."
-    # Add DaVinci Resolve to the packages list in configuration.nix
-    sudo sed -i '/environment.systemPackages = with pkgs; \[/a\    davinci-resolve' "$CONFIG_DIR/configuration.nix"
+    # Add DaVinci Resolve to home.nix packages
+    sudo sed -i '/home.packages = with pkgs; \[/a\    davinci-resolve' "$CONFIG_DIR/home.nix"
 fi
 
 # Preserve the original hardware-configuration.nix
 if [[ -f "$BACKUP_DIR/hardware-configuration.nix" ]]; then
     echo "Restoring original hardware-configuration.nix..."
     sudo cp "$BACKUP_DIR/hardware-configuration.nix" "$CONFIG_DIR/"
+fi
+
+# Copy desktop icons to user application directory
+echo "Installing desktop shortcuts..."
+USER_APPS_DIR="/home/$USERNAME/.local/share/applications"
+sudo mkdir -p "$USER_APPS_DIR"
+if [[ -f "$CONFIG_DIR/NixOS Rebuild.desktop" ]]; then
+    sudo cp "$CONFIG_DIR/NixOS Rebuild.desktop" "$USER_APPS_DIR/"
+    sudo chown $USERNAME:users "$USER_APPS_DIR/NixOS Rebuild.desktop"
+fi
+if [[ -f "$CONFIG_DIR/NixOS Update.desktop" ]]; then
+    sudo cp "$CONFIG_DIR/NixOS Update.desktop" "$USER_APPS_DIR/"
+    sudo chown $USERNAME:users "$USER_APPS_DIR/NixOS Update.desktop"
 fi
 
 echo
@@ -216,7 +229,12 @@ if sudo nixos-rebuild switch; then
     echo -e "${GREEN}✓ Flakes enabled successfully${NC}"
 else
     echo -e "${RED}✗ Failed to enable flakes${NC}"
-    echo "Check the configuration and try manually: sudo nixos-rebuild switch"
+    if [[ $? -eq 130 ]]; then
+        echo -e "${YELLOW}Sudo authentication timed out during build.${NC}"
+        echo "This is normal for long builds. Just run the installer again - it will be much faster now!"
+        echo "Most packages are already downloaded and the system is partially configured."
+    fi
+    echo "You can also try manually: sudo nixos-rebuild switch"
     exit 1
 fi
 
@@ -231,6 +249,11 @@ if sudo nixos-rebuild switch --flake ".#$HOSTNAME"; then
     echo -e "${GREEN}✓ Gaming configuration applied successfully!${NC}"
 else
     echo -e "${RED}✗ Failed to apply gaming configuration${NC}"
+    if [[ $? -eq 130 ]]; then
+        echo -e "${YELLOW}Sudo authentication timed out during build.${NC}"
+        echo "This is normal for long builds. Just run the installer again - it will be much faster now!"
+        echo "Most packages are already downloaded and the system is partially configured."
+    fi
     echo "You can try manually with: sudo nixos-rebuild switch --flake .#$HOSTNAME"
     echo "Or check for errors with: sudo nixos-rebuild switch --flake .#$HOSTNAME --show-trace"
     exit 1
