@@ -6,7 +6,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    #Lanzaboote for secure boot
+    #Lanzaboote for secure boot, delete if unwanted
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,7 +29,7 @@
     {
       self,
       nixpkgs,
-      lanzaboote,
+      lanzaboote,  # delete if you don't want secure boot
       nix-flatpak,
       home-manager,
       chaotic,
@@ -53,7 +53,7 @@
         modules = [
           ./configuration.nix
 
-          # Secure boot files
+          # Secure boot files, delete if unwanted
           # ./modules/security/secure-boot.nix
           # lanzaboote.nixosModules.lanzaboote
 
