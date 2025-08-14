@@ -53,7 +53,7 @@
         modules = [
           ./configuration.nix
 
-          # Secure boot files, delete if unwanted
+          # Secure boot files, delete if unwanted, otherwise uncomment
           # ./modules/security/secure-boot.nix
           # lanzaboote.nixosModules.lanzaboote
 
