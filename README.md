@@ -95,6 +95,15 @@ The default configuration is disk agnostic. If you don't want automount, delete 
 
 To find your disk UUID: Run `lsblk -f` to see all your drives and their UUIDs.
 
+### Test branch
+Should you want to test the latest features, you can pull the install script from the test branch, but be aware that things could break:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/Xarianne/NixOS4Gaming/test/nixos4gaming-installer-amd.sh -o test-installer.sh
+chmod +x test-installer.sh 
+./test-installer.sh
+```
+
 # Manual Installation
 
 ## Quick Start

@@ -20,6 +20,10 @@
     ./modules/system/localization.nix
     ./modules/system/maintenance.nix
 
+    # Gaming
+    ./modules/gaming/gaming-optimizations.nix
+    ./modules/gaming/gaming-packages.nix
+
     # Desktop and audio
     ./modules/desktop/plasma.nix
     ./modules/audio/pipewire.nix
@@ -27,6 +31,7 @@
     # Hardware
     ./modules/hardware/automount.nix
     ./modules/hardware/peripherals.nix
+    ./modules/hardware/amd-graphics.nix
 
     # Features
     ./modules/flatpak/flatpaks.nix
