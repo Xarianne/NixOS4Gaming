@@ -193,13 +193,18 @@ echo
 if sudo nixos-rebuild switch; then
     echo -e "${GREEN}✓ Flakes enabled successfully${NC}"
 else
+    EXIT_CODE=$?
     echo -e "${RED}✗ Failed to enable flakes${NC}"
-    if [[ $? -eq 130 ]]; then
-        echo -e "${YELLOW}Sudo authentication timed out during build.${NC}"
-        echo "This is normal for long builds. Just run the installer again - it will be much faster now!"
-        echo "Most packages are already downloaded and the system is partially configured."
-    fi
-    echo "You can also try manually: sudo nixos-rebuild switch"
+    echo -e "${YELLOW}Build failed with exit code: $EXIT_CODE${NC}"
+    echo
+    echo -e "${YELLOW}This is likely due to:${NC}"
+    echo "• Network issues while downloading packages"
+    echo "• Long build time (this is normal on first run)"
+    echo "• Configuration errors"
+    echo
+    echo -e "${YELLOW}To resolve:${NC}"
+    echo "1. Run the installer again - it will be much faster now!"
+    echo "2. Or try manually: sudo nixos-rebuild switch"
     exit 1
 fi
 
@@ -213,14 +218,20 @@ cd "$CONFIG_DIR"
 if sudo nixos-rebuild switch --flake ".#$HOSTNAME"; then
     echo -e "${GREEN}✓ Gaming configuration applied successfully!${NC}"
 else
+    EXIT_CODE=$?
     echo -e "${RED}✗ Failed to apply gaming configuration${NC}"
-    if [[ $? -eq 130 ]]; then
-        echo -e "${YELLOW}Sudo authentication timed out during build.${NC}"
-        echo "This is normal for long builds. Just run the installer again - it will be much faster now!"
-        echo "Most packages are already downloaded and the system is partially configured."
-    fi
-    echo "You can try manually with: sudo nixos-rebuild switch --flake .#$HOSTNAME"
-    echo "Or check for errors with: sudo nixos-rebuild switch --flake .#$HOSTNAME --show-trace"
+    echo -e "${YELLOW}Build failed with exit code: $EXIT_CODE${NC}"
+    echo
+    echo -e "${YELLOW}This is likely due to:${NC}"
+    echo "• Network issues while downloading packages"
+    echo "• Long build time (this is normal on first run)"
+    echo "• Missing dependencies or build errors"
+    echo
+    echo -e "${YELLOW}To resolve:${NC}"
+    echo "1. Run the installer again - it will be much faster now!"
+    echo "   (Most packages are already downloaded and cached)"
+    echo "2. Or try manually: sudo nixos-rebuild switch --flake .#$HOSTNAME"
+    echo "3. For detailed errors: sudo nixos-rebuild switch --flake .#$HOSTNAME --show-trace"
     exit 1
 fi
 
