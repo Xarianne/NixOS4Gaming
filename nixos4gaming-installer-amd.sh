@@ -55,7 +55,6 @@ echo -e "${GREEN}Step 2: Configuration${NC}"
 USERNAME=""
 HOSTNAME=""
 KERNEL_CHOICE=""
-CUSTOM_DNS=""
 VIRTUALIZATION=""
 DAVINCI_RESOLVE=""
 
@@ -91,9 +90,6 @@ fi
 echo
 echo -e "${GREEN}Optional features:${NC}"
 
-read -p "Enable custom DNS configuration? (y/N): " CUSTOM_DNS < /dev/tty
-CUSTOM_DNS=${CUSTOM_DNS:-n}
-
 read -p "Enable virtualization (QEMU/KVM)? (Y/n): " VIRTUALIZATION < /dev/tty
 VIRTUALIZATION=${VIRTUALIZATION:-y}
 
@@ -106,7 +102,6 @@ echo "Username: $USERNAME"
 echo "Hostname: $HOSTNAME"
 echo "GPU: AMD Radeon"
 echo "Kernel: $(if [[ $KERNEL_CHOICE == "2" ]]; then echo "CachyOS (gaming optimized)"; else echo "Latest NixOS"; fi)"
-echo "Custom DNS: $(echo $CUSTOM_DNS | tr '[:lower:]' '[:upper:]')"
 echo "Virtualization: $(echo $VIRTUALIZATION | tr '[:lower:]' '[:upper:]')"
 echo "DaVinci Resolve: $(echo $DAVINCI_RESOLVE | tr '[:lower:]' '[:upper:]')"
 echo
@@ -269,8 +264,7 @@ echo
 echo -e "${YELLOW}Next steps:${NC}"
 echo "1. Reboot your system to ensure all changes take effect"
 echo "2. Launch Steam and log in to your account"
-echo "3. Enable Proton in Steam settings for Windows game compatibility"
-echo "4. Install MangoHud overlay for performance monitoring"
+echo "3. Enjoy gaming on NixOS!"
 echo
 echo -e "${YELLOW}Useful commands:${NC}"
 echo "• Update system: sudo nixos-rebuild switch --flake .#$HOSTNAME"
