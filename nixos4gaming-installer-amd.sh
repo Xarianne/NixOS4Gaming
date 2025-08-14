@@ -59,6 +59,16 @@ DAVINCI_RESOLVE=""
 
 echo -e "${BLUE}This installer configures NixOS for AMD GPU gaming.${NC}"
 
+# Mesa driver choice
+echo
+echo -e "${GREEN}Mesa driver selection:${NC}"
+echo "1. Latest Mesa drivers (recommended - works with DaVinci Resolve)"
+echo "2. Mesa-git drivers (bleeding edge - slightly better gaming performance but may break DaVinci Resolve)"
+echo
+
+read -p "Choose Mesa drivers (1 for latest, 2 for mesa-git): " MESA_CHOICE < /dev/tty
+MESA_CHOICE=${MESA_CHOICE:-1}
+
 # Kernel choice
 echo
 echo -e "${GREEN}Kernel selection:${NC}"
@@ -84,6 +94,11 @@ echo -e "${YELLOW}Configuration Summary:${NC}"
 echo "Username: $USERNAME"
 echo "Hostname: $HOSTNAME"
 echo "GPU: AMD Radeon"
+if [[ $MESA_CHOICE == "2" ]]; then
+    echo "Mesa: Bleeding-edge (mesa-git)"
+else
+    echo "Mesa: Latest (recommended)"
+fi
 if [[ $KERNEL_CHOICE == "1" ]]; then
     echo "Kernel: CachyOS (gaming optimized)"
 else
@@ -154,6 +169,16 @@ echo "✓ Gaming optimizations"
 
 echo
 echo -e "${GREEN}Step 6: Configuring optional features${NC}"
+
+# Handle Mesa driver choice
+if [[ $MESA_CHOICE == "2" ]]; then
+    echo "Enabling mesa-git drivers..."
+    sudo sed -i 's|^\s*# chaotic.mesa-git.enable = true;|chaotic.mesa-git.enable = true;|' "$CONFIG_DIR/modules/hardware/amd-graphics.nix"
+else
+    echo "Using latest Mesa drivers..."
+    # Make sure mesa-git is commented out (in case it was enabled by default)
+    sudo sed -i 's|^\s*chaotic.mesa-git.enable = true;|# &|' "$CONFIG_DIR/modules/hardware/amd-graphics.nix"
+fi
 
 # Handle kernel choice
 if [[ $KERNEL_CHOICE == "2" ]]; then
@@ -226,8 +251,8 @@ else
     echo -e "${YELLOW}Build failed with exit code: $EXIT_CODE${NC}"
     echo
     echo -e "${YELLOW}This is likely due to:${NC}"
-    echo "• Long build time (this is normal on first run)"
     echo "• Network issues while downloading packages"
+    echo "• Long build time (this is normal on first run)"
     echo "• Missing dependencies or build errors"
     echo
     echo -e "${YELLOW}To resolve:${NC}"
