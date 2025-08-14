@@ -16,8 +16,6 @@
     };
   };
   virtualisation.spiceUSBRedirection.enable = true;
-  services.spice-vdagent.enable = true;
-
   # Add your user to the 'libvirtd' group
   users.users.${systemUsername}.extraGroups = [ "libvirtd" ];
 
