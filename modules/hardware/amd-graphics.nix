@@ -2,7 +2,6 @@
 { config, pkgs, lib, ... }:
 {
   # Mesa-git drivers - bleeding edge graphics drivers for AMD
-  # Provides performance improvements for newer AMD GPUs (especially RDNA 3/4)
   chaotic.mesa-git.enable = true;
   
   # Graphics configuration for AMD
@@ -20,4 +19,13 @@
       rocmPackages.miopen
     ];
   };
+  
+  # Enable ROCm for compute workloads
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+  
+  # Make sure your user can access the GPU for compute
+  users.groups.render = {};
+  users.users.${config.users.users.keys.systemUsername or "your-username"}.extraGroups = [ "render" "video" ];
 }
