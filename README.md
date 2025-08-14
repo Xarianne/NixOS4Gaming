@@ -47,6 +47,8 @@ This will download the script, then make it executable and run it. Once you have
 
 The script will then automate the steps below in the manual installation but it will leave Lanzaboote inactive. If you want to activate secure boot, please follow the instructions in the section below. Do it after you completed the installation and you switched to your new build.
 
+Please note that installing everything in this configuration will make your first build rather long. The CachyOS kernel especially will have to be compiled. It will be much faster the next time you build switch, unless you compile a whole new kernel again.
+
 After you installed everything, if you want easy buttons for updates to your system please see the section **Desktop Icons for Easy Updates**.
 
 ### Lanzaboote Secure Boot Setup
@@ -122,9 +124,13 @@ Once you have installed NixOS via the graphical installer and dropped these file
 1. **First time only**: `sudo nixos-rebuild switch` (this enables flakes since your system doesn't have them yet)
 2. **All subsequent builds**: `nixos-rebuild switch --flake .#your-hostname`
 
+Installing everything in this configuration will make your first build rather long. The CachyOS kernel especially will have to be compiled. It will be much faster the next time you build switch, unless you compile a whole new kernel again.
+
 Note: The default hostname when you install is usually "nixos", but if you changed it during installation, make sure the `#your-hostname` part matches what you set.
 
 To activate secure boot, please see the section **Lanzaboote Secure Boot Setup**.
+
+To change automounting behaviour please see the **Automount template** section.
 
 ## What's Included
 
