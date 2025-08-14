@@ -35,7 +35,6 @@
 
     # Network
     ./modules/network/networking.nix
-    # ./modules/network/dns.nix  # Uncomment to use custom DNS
   ];
 
   # Bootloader
