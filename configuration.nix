@@ -66,6 +66,7 @@
   environment.systemPackages = with pkgs; [
     kdePackages.partitionmanager
     mesa-demos
+    sbctl
   ];
 
   # Install firefox.
