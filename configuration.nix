@@ -36,7 +36,6 @@
     # Features
     ./modules/flatpak/flatpaks.nix
     ./modules/virtualisation/virtualisation.nix
-    ./modules/gaming/gaming-optimizations.nix
 
     # Network
     ./modules/network/networking.nix
