@@ -39,11 +39,11 @@
     let
       # Define your username here at the flake level
       # This is the single place to change it for this system
-      systemUsername = "xariann"; # <--- IMPORTANT: Change this line to your desired username
+      systemUsername = "your-username"; # <--- IMPORTANT: Change this line to your desired username
 
       # Define your hostname here at the flake level
       # This is the single place to change it for this system
-      systemHostname = "nixos"; # <--- IMPORTANT: Change this line to your desired hostname
+      systemHostname = "your-hostname"; # <--- IMPORTANT: Change this line to your desired hostname
     in
 
     {
