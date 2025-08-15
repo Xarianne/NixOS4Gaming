@@ -61,21 +61,6 @@
     ];
   };
 
-  # Home Manager global configuration for this NixOS system
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-
-  # This links your system user to your home.nix configuration
-  home-manager.users.${systemUsername} = import ./home.nix {
-    inherit
-      config
-      pkgs
-      lib
-      systemUsername
-      systemHostname
-      ;
-  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

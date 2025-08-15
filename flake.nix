@@ -14,7 +14,7 @@
 
     # Declarative flaptak config
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-    
+
     #Chaotic Nyx repo
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
@@ -65,6 +65,18 @@
 
           # Home Manager module
           home-manager.nixosModules.home-manager
+
+          # Home Manager configuration
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {
+                inherit systemUsername systemHostname;
+              };
+              users.${systemUsername} = import ./home.nix;
+            };
+          }
         ];
 
         # Pass special arguments to your modules
