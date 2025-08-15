@@ -1,4 +1,4 @@
-# NixOS for Gaming and Production (for AMD)
+# NixOS for Gaming (for AMD)
 
 These are my personal configuration files. I decided to share them in case other people want a jump-start for their own gaming machine. As I am new to NixOS, this might not be the most efficient code you have ever seen, but the setup works. Feel free to tweak it for your own use. I use KDE so bear this in mind. 
 
