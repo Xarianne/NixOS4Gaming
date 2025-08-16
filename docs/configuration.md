@@ -3,13 +3,16 @@
 ## Gaming Packages
 **Steam** of course. I am using the native version here for ease of integration (not the Flatpak). Also **Proton Plus** so you can install your favourite custom Proton versions (for example Proton GE or Cachy Proton), **Lutris**, **MangoHud** (and **MangoJuice** to configure it), **Discord** (to chat with your friends while playing). There is also RetroArch if you need emulation.
 
+### Emulation Support
+With RetroArch. It supports most emulation environments.
+
+### OpenRGB and OpenRazer
+For your keyboard/PC case lighting needs.
+
 ## OBS and DaVinci Resolve
 If you are a content creator who likes to share their gaming-related content.
 
-## Emulation Support
-With RetroArch. It supports most emulation environments.
-
-### Other Packages
+## Other Packages
 Just have a look at the Flatpak module and home-manager configuration for the full list.
 
 ## Other Features
