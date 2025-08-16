@@ -4,6 +4,8 @@ These are my personal configuration files. I decided to share them in case other
 
 ## Quick Start
 
+First install NixOS via the graphical installer. You will need to disable Secure Boot, but I included Lanzaboote if you want to turn it back on. For more information please see [Lanzaboote Secure Boot Setup](docs/installation.md#lanzaboote-secure-boot-setup).
+
 If you're the trusting type I've created an installation script that will install the files for you:
 
 ```bash
