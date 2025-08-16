@@ -1,27 +1,5 @@
-# Gaming Optimisations
+# A Note on "Gaming Optimization"
 
-## Mesa-Git Drivers and the CachyOS Kernel
-These are installed via the Chaotic Nyx repo (enabled in the flake): https://github.com/chaotic-cx/nyx
-
-Please note that when rebuilding the system will create two snapshots: one with the base mesa drivers and one with the bleeding edge mesa-git drivers. So you can always choose what to use. The mesa-git drivers can sometimes cause DaVinci Resolve to complain about your graphics card. You have two choices: you can load the snapshot with the base mesa when you want to use DaVinci Resolve and then swap back to mesa-git when you are done, or you can decide to turn off mesa-git entirely. The installer will ask you if you want to install mesa-git in the first place. If you are not using the installer, you can go to the modules/hardware/amd-graphics.nix and uncomment the mesa-git line to turn it on:
-
-```nix
-  # Mesa-git drivers - bleeding edge graphics drivers for AMD
-  # Provides performance improvements for newer AMD GPUs (especially RDNA 4)
-  # chaotic.mesa-git.enable = true;   # <----- uncomment this line if you want mesa-git
-```  
-
-If you don't want to use the CachyOS Kernel the modules/gaming/gaming-optimizations.nix file still has NixOS's own kernel. Uncomment the kernel you want to use:
-
-```nix
-  # Use latest standard NixOS kernel, choose either this or the CachyOS one (below)
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  # Use Cachy kernel (turned on by default)
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
-```
-
-## A Note on "Gaming Optimization"
 Things like custom kernels, mesa-git drivers, network optimizations, etc. may or may not result in improved gaming performance. For example, for me mesa-git lifted my graphics card performance by about 20% and decreased temperatures, compared to the version that was available on stable Fedora. But Fedora does take its time to test software before it releases it. When I benchmarked again against what is available just from the unstable branch in NixOS (25.2) the performance difference was within margin of error. However, when I benchmarked 25.2 on Bazzite (they use the Terra drivers), my PC was running slightly hotter. So whether you will get a "performance gain" depends on what you are comparing your mesa-git drivers to, and whether your hardware benefits from the new features. If you are on the latest generation graphics card, I would suggest you get the latest drivers you can get. I first looked into mesa-git when I needed FSR4 support on my RDNA 4 graphics card. At the time it wasn't available on stable drivers, but this has now changed. 
 
 On top of this, NixOS unstable already offers very recent drivers, and you might not need to risk the instability of mesa-git. Also bear in mind that this configuration takes two snapshots every time you rebuild: one with the normal drivers and one with mesa-git so you should never be in the position of not being able to use your PC even if you do keep mesa-git.
