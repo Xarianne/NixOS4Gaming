@@ -1,3 +1,5 @@
+# Installation Guide
+
 ## Automatic Installation
 If you are the trusting type I have created an installation script that will install the files for you. It will also ask you which kernel to use (CachyOS or the latest NixOS Kernel), whether you want DaVinci Resolve and whether you want virtualization to be turned on. Not everyone needs DaVinci and if your PC does not support virtualization then it will be pointless to install it. The script is in this repo so you can inspect it. To use it:
 
