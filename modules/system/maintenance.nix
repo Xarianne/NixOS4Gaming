@@ -18,6 +18,7 @@
     git
     git-filter-repo
     yadm
+    sbctl
     fwupd
   ];
 

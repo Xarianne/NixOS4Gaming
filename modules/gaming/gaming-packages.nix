@@ -13,6 +13,5 @@
     goverlay       # GUI for MangoHud configuration
     lutris         # Another game launcher
     input-remapper # Universal input device remapping
-    antimicrox     # Gaming-focused controller mapping
   ];
 }

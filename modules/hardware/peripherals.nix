@@ -14,6 +14,6 @@
 
   # Secure boot tools if using lanzaboote
   environment.systemPackages = with pkgs; [
-    sbctl
+    python313Packages.openrazer
   ];
 }
