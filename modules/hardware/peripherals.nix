@@ -17,7 +17,7 @@
 
     # Wheel and Joystic testing and configuration tools
     jstest-gtk          # GUI for testing/calibrating joysticks
-    linuxConsoleTools   # Includes jscal, jstest (command line tools
+    linuxConsoleTools   # Includes jscal, jstest (command line tools)
   ];
 
   # Enable CUPS to print documents
