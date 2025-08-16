@@ -157,7 +157,7 @@ nix-shell -p git --run "
     
     echo 'Copying configuration files...'
     sudo cp -r /tmp/nixos4gaming-temp/* '$CONFIG_DIR/'
-    sudo cp -r /tmp/nixos4gaming-temp/.* '$CONFIG_DIR/' 2>/dev/null || true
+    # Don't copy hidden files (.git, etc.) - they cause flake issues
     rm -rf /tmp/nixos4gaming-temp
     echo 'Repository downloaded successfully'
 "
