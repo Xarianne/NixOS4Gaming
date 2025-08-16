@@ -149,29 +149,17 @@ echo -e "${GREEN}Step 4: Downloading gaming configuration${NC}"
 
 # Use nix-shell to get git temporarily and download the config
 nix-shell -p git --run "
-    echo 'Downloading latest repository...'
-    
-    # Clean download in /tmp
-    rm -rf /tmp/nixos4gaming-temp
-    git clone '$REPO_URL' /tmp/nixos4gaming-temp
-    
+    cd '$CONFIG_DIR'
+    echo 'Cloning repository...'
+    sudo git clone '$REPO_URL' temp-gaming-config
     echo 'Copying configuration files...'
-    # Remove the installer from the temp directory before copying to avoid overwriting ourselves
-    rm -f /tmp/nixos4gaming-temp/nixos4gaming-installer-amd.sh
-    
-    sudo cp -r /tmp/nixos4gaming-temp/* '$CONFIG_DIR/'
-    rm -rf /tmp/nixos4gaming-temp
-    echo 'Repository downloaded successfully (installer script preserved)'
+    sudo cp -r temp-gaming-config/* .
+    sudo rm -rf temp-gaming-config
+    echo 'Repository downloaded successfully'
 "
 
 echo
 echo -e "${GREEN}Step 5: Customizing configuration${NC}"
-
-# Preserve the original hardware-configuration.nix FIRST
-if [[ -f "$BACKUP_DIR/hardware-configuration.nix" ]]; then
-    echo "Restoring original hardware-configuration.nix..."
-    sudo cp "$BACKUP_DIR/hardware-configuration.nix" "$CONFIG_DIR/"
-fi
 
 # Customize flake.nix with user settings
 echo "Updating flake.nix with your settings..."
@@ -229,6 +217,12 @@ if [[ $DAVINCI_RESOLVE =~ ^[Nn]$ ]] || [[ -z $DAVINCI_RESOLVE ]]; then
     sudo sed -i 's|^\s*davinci-resolve|    # davinci-resolve|' "$CONFIG_DIR/home.nix"
 else
     echo "Keeping DaVinci Resolve in configuration..."
+fi
+
+# Preserve the original hardware-configuration.nix
+if [[ -f "$BACKUP_DIR/hardware-configuration.nix" ]]; then
+    echo "Restoring original hardware-configuration.nix..."
+    sudo cp "$BACKUP_DIR/hardware-configuration.nix" "$CONFIG_DIR/"
 fi
 
 echo
