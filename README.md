@@ -20,7 +20,7 @@ If you are not the trusting type, then follow the [manual installation instructi
 
 **Gaming stuff**: Steam (native, not Flatpak), Proton Plus for custom Proton versions, Lutris, MangoHud, Discord, RetroArch.
 
-**The controversial bits**: Mesa-git drivers and CachyOS kernel via Chaotic Nyx repo. These may or may not improve your performance - I've written up my thoughts on this in the [gaming optimisations guide](docs/gaming-optimisations.md).
+**The controversial bits**: Mesa-git drivers and CachyOS kernel via Chaotic Nyx repo. These may or may not improve your performance - I've written up my thoughts on this in [A Note on "Gaming Optimization"](docs/gaming-optimisations.md).
 
 **Other bits**: Declarative Flatpak setup (blame the Universal Blue team for me liking Flatpak), secure boot support with Lanzaboote, virtualisation for when you need to update those pesky peripherals in Windows.
 
