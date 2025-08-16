@@ -2,7 +2,7 @@
 
 ## Common Issues:
 - **Flake errors**: Make sure you've changed the username and hostname in `flake.nix`
-- **GPU issues**: This config is AMD-specific. For NVIDIA, you'll need to modify the graphics configuration; as I have not had to do it myself I can't give you proper instructions; in the **That's it folks!** section below there is a video that has that information, but checking the NixOS documentation is your best bet
+- **GPU issues**: This config is AMD-specific. For NVIDIA, you'll need to modify the graphics configuration; as I have not had to do it myself I can't give you proper instructions; in the **Helpful Tutorials** section below there is a video that has that information, but checking the NixOS documentation is your best bet
 - **Build failures**: Try `sudo nixos-rebuild switch --flake .#your-hostname --show-trace` for more detailed error messages
 - **Mesa-git build failure**: mesa-git is the developer version of the drivers; builds sometimes can fail if you run the update, if that's what's causing the issue, then disable mesa-git temporarily by going to `/etc/nixos/modules/hardware/amd-graphics.nix` and comment out the mesa-git drivers:
   ```Nix
