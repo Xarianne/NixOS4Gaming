@@ -165,8 +165,6 @@ If you just enable Flatpaks in NixOS you will have to install them as you would 
 
 Why Flatpak? Sandboxing and proprietary software. I like to sandbox my browser and most internet-facing software. I didn't sandbox Steam for ease of integration with things such as MangoHud (your performance overlay). Other software uses Flatpak as their official means of distribution such as OBS. I also provided you with Flatseal so you can easily change Flatpak permissions and Warehouse so you can snapshot and clean up old data. Blame the Universal Blue team for me liking Flatpak ;)
 
-I haven't actually listed a browser in this repo because everyone has their preference, so you'll get the non-Flatpak version of Firefox that comes with the NixOS graphical installer. But my own build uses a browser with Flatpak. 
-
 Bear in mind that you can still install nix packages the normal way, the Flatpaks are an addition.
 
 ### OBS and DaVinci Resolve
