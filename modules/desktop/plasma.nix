@@ -20,5 +20,6 @@
   # KDE Applications
   environment.systemPackages = with pkgs; [
     kdePackages.partitionmanager
+    kdePackages.qtstyleplugin-kvantum
   ];
 }
