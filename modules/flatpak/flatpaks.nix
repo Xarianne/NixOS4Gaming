@@ -10,7 +10,6 @@
     { appId = "com.obsproject.Studio"; origin = "flathub"; }
     "com.obsproject.Studio.Plugin.InputOverlay" # OBS addon
     "com.obsproject.Studio.Plugin.BackgroundRemoval" # OBS addon
-    "org.freedesktop.Platform.VulkanLayer.OBSVkCapture" # OBS addon
     "com.vivaldi.Vivaldi"
     "com.discordapp.Discord"
     "org.localsend.localsend_app"
