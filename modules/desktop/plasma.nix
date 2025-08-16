@@ -1,3 +1,4 @@
+# /etc/nixos/modules/desktop/plasma.nix
 { pkgs, ... }:
 {
   # Enable the X11 windowing system
@@ -15,4 +16,9 @@
 
   # Configure console keymap
   console.keyMap = "uk";
+
+  # KDE Applications
+  environment.systemPackages = with pkgs; [
+    kdePackages.partitionmanager
+  ];
 }
