@@ -165,6 +165,12 @@ nix-shell -p git --run "
 echo
 echo -e "${GREEN}Step 5: Customizing configuration${NC}"
 
+# Preserve the original hardware-configuration.nix FIRST
+if [[ -f "$BACKUP_DIR/hardware-configuration.nix" ]]; then
+    echo "Restoring original hardware-configuration.nix..."
+    sudo cp "$BACKUP_DIR/hardware-configuration.nix" "$CONFIG_DIR/"
+fi
+
 # Customize flake.nix with user settings
 echo "Updating flake.nix with your settings..."
 sudo sed -i "s/your-username/$USERNAME/g" "$CONFIG_DIR/flake.nix"
@@ -221,12 +227,6 @@ if [[ $DAVINCI_RESOLVE =~ ^[Nn]$ ]] || [[ -z $DAVINCI_RESOLVE ]]; then
     sudo sed -i 's|^\s*davinci-resolve|    # davinci-resolve|' "$CONFIG_DIR/home.nix"
 else
     echo "Keeping DaVinci Resolve in configuration..."
-fi
-
-# Preserve the original hardware-configuration.nix
-if [[ -f "$BACKUP_DIR/hardware-configuration.nix" ]]; then
-    echo "Restoring original hardware-configuration.nix..."
-    sudo cp "$BACKUP_DIR/hardware-configuration.nix" "$CONFIG_DIR/"
 fi
 
 echo
