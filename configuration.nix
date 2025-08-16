@@ -23,6 +23,7 @@
     # Gaming
     ./modules/gaming/gaming-optimizations.nix
     ./modules/gaming/gaming-packages.nix
+    ./modules/gaming/emulation.nix
 
     # Desktop and audio
     ./modules/desktop/plasma.nix

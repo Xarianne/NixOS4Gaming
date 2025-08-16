@@ -1,3 +1,4 @@
+# etc/nixos/modules/hardware/peripherals.nix
 { pkgs, ... }:
 {
   # Enable udevrules for OpenRGB
@@ -9,11 +10,24 @@
     # Add the missing libraries here
   ];
 
+  # Peripheral tools and utilities
+  environment.systemPackages = with pkgs; [
+    
+    python313Packages.openrazer
+
+    # Wheel and Joystic testing and configuration tools
+    jstest-gtk          # GUI for testing/calibrating joysticks
+    linuxConsoleTools   # Includes jscal, jstest (command line tools)
+  ];
+
   # Enable CUPS to print documents
   services.printing.enable = true;
 
-  # Secure boot tools if using lanzaboote
-  environment.systemPackages = with pkgs; [
-    python313Packages.openrazer
-  ];
+  # Optional: Add user to input group (should not be needed on modern NixOS)
+  # users.users.youruser.extraGroups = [ "input" ];
+
+  # Modern kernels should support force feedback and many joysticks 
+  # on their own without the need for third party software
+  # Some distros also add Xone, but kernels nowadays provide good 
+  # controller support out of the box
 }
