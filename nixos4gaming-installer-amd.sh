@@ -55,6 +55,7 @@ echo -e "${GREEN}Step 2: Configuration${NC}"
 # Initialize variables to avoid unbound variable errors
 KERNEL_CHOICE=""
 VIRTUALIZATION=""
+EMULATION=""
 DAVINCI_RESOLVE=""
 
 echo -e "${BLUE}This installer configures NixOS for AMD GPU gaming.${NC}"
@@ -86,6 +87,9 @@ echo -e "${GREEN}Optional features:${NC}"
 read -p "Enable virtualization (QEMU/KVM)? (Y/n): " VIRTUALIZATION < /dev/tty
 VIRTUALIZATION=${VIRTUALIZATION:-y}
 
+read -p "Enable retro gaming emulation? (y/N): " EMULATION < /dev/tty
+EMULATION=${EMULATION:-n}
+
 read -p "Install DaVinci Resolve? (y/N): " DAVINCI_RESOLVE < /dev/tty
 DAVINCI_RESOLVE=${DAVINCI_RESOLVE:-n}
 
@@ -105,6 +109,7 @@ else
     echo "Kernel: Latest NixOS (standard)"
 fi
 echo "Virtualization: $(echo $VIRTUALIZATION | tr '[:lower:]' '[:upper:]')"
+echo "Emulation: $(echo $EMULATION | tr '[:lower:]' '[:upper:]')"
 echo
 
 read -p "Continue with installation? (Y/n): " CONFIRM < /dev/tty
@@ -200,6 +205,14 @@ if [[ $VIRTUALIZATION =~ ^[Nn]$ ]]; then
     sudo sed -i 's|^\s*./modules/virtualisation/virtualisation.nix|# &|' "$CONFIG_DIR/configuration.nix"
 else
     echo "Keeping virtualization enabled..."
+fi
+
+# Handle emulation choice
+if [[ $EMULATION =~ ^[Nn]$ ]] || [[ -z $EMULATION ]]; then
+    echo "Disabling emulation..."
+    sudo sed -i 's|^\s*./modules/gaming/emulation.nix|# &|' "$CONFIG_DIR/configuration.nix"
+else
+    echo "Keeping emulation enabled..."
 fi
 
 if [[ $DAVINCI_RESOLVE =~ ^[Nn]$ ]] || [[ -z $DAVINCI_RESOLVE ]]; then
