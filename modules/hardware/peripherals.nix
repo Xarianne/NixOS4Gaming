@@ -13,7 +13,7 @@
   # Enable CUPS to print documents
   services.printing.enable = true;
 
-  # Secure boot tools if using lanzaboote
+  # Peripheral tools and utilities
   environment.systemPackages = with pkgs; [
     
     python313Packages.openrazer
