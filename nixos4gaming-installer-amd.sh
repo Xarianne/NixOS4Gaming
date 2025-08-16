@@ -156,10 +156,12 @@ nix-shell -p git --run "
     git clone '$REPO_URL' /tmp/nixos4gaming-temp
     
     echo 'Copying configuration files...'
+    # Remove the installer from the temp directory before copying to avoid overwriting ourselves
+    rm -f /tmp/nixos4gaming-temp/nixos4gaming-installer-amd.sh
+    
     sudo cp -r /tmp/nixos4gaming-temp/* '$CONFIG_DIR/'
-    # Don't copy hidden files (.git, etc.) - they cause flake issues
     rm -rf /tmp/nixos4gaming-temp
-    echo 'Repository downloaded successfully'
+    echo 'Repository downloaded successfully (installer script preserved)'
 "
 
 echo
