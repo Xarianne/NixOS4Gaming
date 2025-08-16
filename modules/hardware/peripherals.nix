@@ -10,9 +10,6 @@
     # Add the missing libraries here
   ];
 
-  # Enable CUPS to print documents
-  services.printing.enable = true;
-
   # Peripheral tools and utilities
   environment.systemPackages = with pkgs; [
     
@@ -22,6 +19,9 @@
     jstest-gtk          # GUI for testing/calibrating joysticks
     linuxConsoleTools   # Includes jscal, jstest (command line tools
   ];
+
+  # Enable CUPS to print documents
+  services.printing.enable = true;
 
   # Optional: Add user to input group (should not be needed on modern NixOS)
   # users.users.youruser.extraGroups = [ "input" ];
