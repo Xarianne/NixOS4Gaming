@@ -172,7 +172,7 @@ If you wish to manage software that doesn't need to be installed system-wide in 
 ### Ntsync on
 Ntsync makes Windows games that use Proton run better on Linux. When Windows games need to coordinate different parts of the program they use special Windows-only features. Ntsync translates these features for Linux, making games run smoother with fewer crashes and glitches. Proton GE 10-10 or newer pick up Ntsync automatically if the ntsync module is on (which is why I turned it on). However bear in mind that just because a Proton version supports Ntsync, it doesn't mean it will peform better than one that doesn't, but which has other optimizations.
 
-### Virtualization and Virtual Machine Manager
+### Virtualisation and Virtual Machine Manager
 If you want to try other distros or you need to access Windows to update those pesky peripherals that cannot be updated on Linux, this will have you covered. When you first start Virtual Machine Manager it might tell you you do not have a connection. Just go to **File > Add Connection**, then you should be ready to install your virtual machine.
 
 ### Desktop Icons for Easy Updates
