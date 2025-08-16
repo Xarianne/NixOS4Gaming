@@ -13,7 +13,7 @@
 ## Disabling Features You Don't Want:
 - **Secure boot**: Remove lanzaboote imports and delete `modules/security`
 - **Flatpaks**: Remove the nix-flatpak import from `flake.nix` and the flatpak import from `configuration.nix`
-- **Gaming packages**: Comment out Steam and gaming-related packages in `configuration.nix`
+- **Via the Automatic Installer**: it will give you the choice of whether to install the CachyOS kernel, DaVinci Resolve, virtualisation and emulation support
 
 
 ## Helpful Tutorials
