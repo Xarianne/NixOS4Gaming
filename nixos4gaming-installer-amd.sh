@@ -144,12 +144,16 @@ echo -e "${GREEN}Step 4: Downloading gaming configuration${NC}"
 
 # Use nix-shell to get git temporarily and download the config
 nix-shell -p git --run "
-    cd '$CONFIG_DIR'
-    echo 'Cloning repository...'
-    sudo git clone '$REPO_URL' temp-gaming-config
+    echo 'Downloading latest repository...'
+    
+    # Clean download in /tmp
+    rm -rf /tmp/nixos4gaming-temp
+    git clone '$REPO_URL' /tmp/nixos4gaming-temp
+    
     echo 'Copying configuration files...'
-    sudo cp -r temp-gaming-config/* .
-    sudo rm -rf temp-gaming-config
+    sudo cp -r /tmp/nixos4gaming-temp/* '$CONFIG_DIR/'
+    sudo cp -r /tmp/nixos4gaming-temp/.* '$CONFIG_DIR/' 2>/dev/null || true
+    rm -rf /tmp/nixos4gaming-temp
     echo 'Repository downloaded successfully'
 "
 
