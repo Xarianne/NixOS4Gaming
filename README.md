@@ -14,7 +14,7 @@ chmod +x installer.sh
 ./installer.sh
 ```
 
-The script will ask you which kernel to use (CachyOS or the latest NixOS Kernel), whether you want DaVinci Resolve and whether you want virtualisation to be turned on. Not everyone needs DaVinci and if your PC does not support virtualisation then it will be pointless to install it.
+The script will ask you which kernel to use (CachyOS or the latest NixOS Kernel), whether you want mesa-git, emulation support, DaVinci Resolve and whether you want virtualisation to be turned on. Not everyone needs DaVinci and if your PC does not support virtualisation then it will be pointless to install it.
 
 If you are not the trusting type, then follow the [manual installation instructions](docs/installation.md).
 
