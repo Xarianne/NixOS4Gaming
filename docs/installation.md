@@ -27,7 +27,7 @@ After you have installed everything, if you want easy buttons for updates to you
 ### Lanzaboote Secure Boot Setup
 I included sbctl, which is required to generate and sign your own keys, and lanzaboote, which is required to enable secure boot. 
 
-**If you don't want secure boot**, then delete the lanzaboote references in `flake.nix` and remove the import `./modules/security/secure-boot.nix` from `configuration.nix`. Then delete the `modules/security` folder.
+**If you don't want secure boot**, then delete the lanzaboote references in `flake.nix` including the import: `./modules/security/secure-boot.nix`. Then delete the `modules/security` folder.
 
 If you want to enable secure boot, please follow the tutorial in this link: https://github.com/nix-community/lanzaboote. I commented out two lines in the flake.nix file so that Lanzaboote doesn't interfere with your first build as it can cause issues, but you can uncomment them when ready to follow the tutorial to activate it:
 
