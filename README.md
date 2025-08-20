@@ -13,6 +13,7 @@ curl -sSL https://raw.githubusercontent.com/Xarianne/NixOS4Gaming/main/nixos4gam
 chmod +x installer.sh 
 ./installer.sh
 ```
+Once you are done installing, type `reboot` in your terminal. Don't use KDE's reboot option for this first reboot as it might not work. It will work on every other reboot.
 
 The script will ask you which kernel to use (CachyOS or the latest NixOS Kernel), whether you want mesa-git, emulation support, DaVinci Resolve and whether you want virtualisation to be turned on. Not everyone needs DaVinci and if your PC does not support virtualisation then it will be pointless to install it.
 
