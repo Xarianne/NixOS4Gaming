@@ -167,7 +167,7 @@ sudo sed -i "s/your-username/$USERNAME/g" "$CONFIG_DIR/flake.nix"
 sudo sed -i "s/your-hostname/$HOSTNAME/g" "$CONFIG_DIR/flake.nix"
 
 echo "Configuring for AMD Radeon graphics..."
-echo "✓ Mesa drivers (including mesa-git from Chaotic Nyx)"
+echo "✓ Chaotic Nyx (for CachyOS Kernel and mesa-git should you want them)"
 echo "✓ Vulkan support"  
 echo "✓ Hardware acceleration"
 echo "✓ Gaming optimizations"
