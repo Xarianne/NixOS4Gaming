@@ -40,3 +40,5 @@ Since this README was getting rather long, I've split things up:
 As I said, these are just my own configuration files which I modified for other people's use. I don't pretend to know enough to be able to help with troubleshooting, but hopefully the guides help.
 
 If you want a fully fledged gaming distro instead, check out [GLF OS](https://www.gaminglinux.fr/glf-os/en/), [Bazzite](https://bazzite.gg) or the other [alternatives](docs/alternatives.md) I've listed.
+
+nix.os = with pkgs; [ btw ]
