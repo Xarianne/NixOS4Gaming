@@ -254,7 +254,7 @@ echo -e "${GREEN}Step 8: Final rebuild with gaming configuration${NC}"
 echo "Applying full gaming configuration..."
 echo
 
-# Final rebuild with flake
+# Final rebuild with flake (using locked versions - no update)
 cd "$CONFIG_DIR"
 if sudo nixos-rebuild switch --flake ".#$HOSTNAME"; then
     echo -e "${GREEN}✓ Gaming configuration applied successfully!${NC}"
@@ -294,7 +294,7 @@ echo -e "${GREEN}To reboot properly after installation:${NC}"
 echo "sudo reboot"
 echo
 echo -e "${YELLOW}Useful commands:${NC}"
-echo "• Update system: sudo nixos-rebuild switch --flake .#$HOSTNAME"
+echo "• Rebuild system: sudo nixos-rebuild switch --flake .#$HOSTNAME"
 echo "• Update packages: nix flake update && sudo nixos-rebuild switch --flake .#$HOSTNAME"  
 echo "• Rollback if needed: sudo nixos-rebuild switch --rollback"
 echo
