@@ -14,16 +14,7 @@ chmod +x installer.sh
 ```
 This will download the script, then make it executable and run it. It will also backup your current configuration. Once you have installed everything, you want to type `reboot` in your terminal, if rebooting from the KDE button doesn't work. I have not been able to figure out why this happens yet, regardless of whether I add the configuration manually or via the installer. You will only need to reboot from terminal the first time, then it will work as intended from KDE.
 
-**Note**: The `hardware-configuration.nix` file in this repository is a dummy file for automated testing. 
-
-**During installation, the installer script will automatically:**
-1. Back up this dummy file
-2. Use your actual hardware-configuration.nix generated during NixOS installation
-3. Preserve your real hardware configuration
-
-You don't need to modify or worry about this file.
-
-The script will also ask you whether you want the CachyOS Kernel, emulation, DaVinci Resolve, mesa-git or virtualisation.
+The script will ask you whether you want the CachyOS Kernel, emulation, DaVinci Resolve, mesa-git or virtualisation.
 
 The script will then automate the steps below in the manual installation but it will leave Lanzaboote inactive. If you want to activate secure boot, please follow the instructions in the section below. Do it after you have completed the installation and you have switched to your new build.
 
