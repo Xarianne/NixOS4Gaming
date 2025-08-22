@@ -1,0 +1,17 @@
+{
+  "extends": ["config:base"],
+  "schedule": ["every weekend"],
+  "automerge": false,
+  "platformAutomerge": false,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["every weekend"]
+  },
+  "packageRules": [
+    {
+      "groupName": "NixOS dependencies",
+      "matchManagers": ["nix"],
+      "schedule": ["every weekend"]
+    }
+  ]
+}
