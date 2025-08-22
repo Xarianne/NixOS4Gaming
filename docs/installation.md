@@ -29,7 +29,7 @@ I included sbctl, which is required to generate and sign your own keys, and lanz
 
 **If you don't want secure boot**, then delete the lanzaboote references in `flake.nix` including the import: `./modules/security/secure-boot.nix`. Then delete the `modules/security` folder.
 
-If you want to enable secure boot, please follow the tutorial in this link: https://github.com/nix-community/lanzaboote. I commented out two lines in the flake.nix file so that Lanzaboote doesn't interfere with your first build as it can cause issues, but you can uncomment them when ready to follow the tutorial to activate it:
+If you want to enable secure boot, please follow the tutorial in this link: https://github.com/nix-community/lanzaboote. I commented out two lines in the flake.nix file so that Lanzaboote doesn't interfere with your first build as it can cause issues; when you decide to enable secure boot, create the keys as explained in the tutorial FIRST, then you can uncomment the lines and rebuild:
 
 ```nix
 # Secure boot files
