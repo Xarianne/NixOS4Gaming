@@ -19,7 +19,7 @@
   # Example: Add some packages
   home.packages = with pkgs; [
     kdePackages.kate
-    davinci-resolve
+    # davinci-resolve
     mangohud
     goverlay
   ];
