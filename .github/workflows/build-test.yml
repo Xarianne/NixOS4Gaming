@@ -1,0 +1,54 @@
+# .github/workflows/build-test.yml
+name: Build and Test NixOS Configuration
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # Manual trigger
+  schedule:
+    # Test weekly to catch issues early
+    - cron: '0 2 * * 1'  # Every Monday at 2 AM UTC
+
+jobs:
+  build-config:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install Nix
+      uses: cachix/install-nix-action@v24
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+          accept-flake-config = true
+    
+    # Optional: Use Cachix to speed up builds
+    - name: Setup Cachix
+      uses: cachix/cachix-action@v12
+      if: github.event_name != 'pull_request_target'
+      with:
+        name: nix-community
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+    
+    # Replace placeholders with test values
+    - name: Prepare configuration for testing
+      run: |
+        sed -i 's/your-username/testuser/g' flake.nix
+        sed -i 's/your-hostname/testhost/g' flake.nix
+    
+    # Test that the flake builds without actually installing
+    - name: Build system configuration
+      run: |
+        nix build .#nixosConfigurations.testhost.config.system.build.toplevel \
+          --print-build-logs \
+          --show-trace
+    
+    # Check flake formatting and syntax
+    - name: Check flake
+      run: |
+        nix flake check --print-build-logs
