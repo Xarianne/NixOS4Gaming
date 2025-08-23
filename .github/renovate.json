@@ -4,8 +4,8 @@
   "nix": {
     "enabled": true
   },
-  "schedule": [
-    "on Sunday",
-    "at 3am"
-  ]
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 4am on monday"]
+  }
 }
