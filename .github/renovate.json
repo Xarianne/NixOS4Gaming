@@ -4,5 +4,8 @@
   "nix": {
     "enabled": true
   },
-  "schedule": ["weekly"]
+  "schedule": [
+    "on Sunday",
+    "at 3am"
+  ]
 }
