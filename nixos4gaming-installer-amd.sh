@@ -73,11 +73,11 @@ MESA_CHOICE=${MESA_CHOICE:-1}
 # Kernel choice
 echo
 echo -e "${GREEN}Kernel selection:${NC}"
-echo "1. CachyOS Kernel (recommended for gaming, default)"
-echo "2. Latest NixOS Kernel (standard - may make the update faster)"
+echo "1. Latest NixOS Kernel (standard - default)"
+echo "2. CachyOS Kernel (gaming optimized - may take longer to build)"
 echo
 
-read -p "Choose kernel (1 for CachyOS, 2 for NixOS): " KERNEL_CHOICE < /dev/tty
+read -p "Choose kernel (1 for NixOS, 2 for CachyOS): " KERNEL_CHOICE < /dev/tty
 KERNEL_CHOICE=${KERNEL_CHOICE:-1}
 
 # Optional features
@@ -103,13 +103,14 @@ if [[ $MESA_CHOICE == "2" ]]; then
 else
     echo "Mesa: Latest (recommended)"
 fi
-if [[ $KERNEL_CHOICE == "1" ]]; then
+if [[ $KERNEL_CHOICE == "2" ]]; then
     echo "Kernel: CachyOS (gaming optimized)"
 else
     echo "Kernel: Latest NixOS (standard)"
 fi
 echo "Virtualization: $(echo $VIRTUALIZATION | tr '[:lower:]' '[:upper:]')"
 echo "Emulation: $(echo $EMULATION | tr '[:lower:]' '[:upper:]')"
+echo "DaVinci Resolve: $(echo $DAVINCI_RESOLVE | tr '[:lower:]' '[:upper:]')"
 echo
 
 read -p "Continue with installation? (Y/n): " CONFIRM < /dev/tty
@@ -168,7 +169,7 @@ sudo sed -i "s/your-hostname/$HOSTNAME/g" "$CONFIG_DIR/flake.nix"
 
 echo "Configuring for AMD Radeon graphics..."
 echo "✓ Chaotic Nyx (for CachyOS Kernel and mesa-git should you want them)"
-echo "✓ Vulkan support"  
+echo "✓ Vulkan support"
 echo "✓ Hardware acceleration"
 echo "✓ Gaming optimizations"
 
@@ -187,14 +188,16 @@ fi
 
 # Handle kernel choice
 if [[ $KERNEL_CHOICE == "2" ]]; then
-    echo "Configuring for NixOS kernel..."
-    sudo sed -i 's|^\s*boot.kernelPackages = pkgs.linuxPackages_cachyos;|# &|' "$CONFIG_DIR/modules/gaming/gaming-optimizations.nix"
-    sudo sed -i 's|^\s*# boot.kernelPackages = pkgs.linuxPackages_latest;|boot.kernelPackages = pkgs.linuxPackages_latest;|' "$CONFIG_DIR/modules/gaming/gaming-optimizations.nix"
+    echo "Configuring for CachyOS kernel..."
+    # Comment out the NixOS kernel line
+    sudo sed -i 's|^\s*boot.kernelPackages = pkgs.linuxPackages_latest;|# &|' "$CONFIG_DIR/modules/gaming/gaming-optimizations.nix"
+    # Uncomment the CachyOS kernel line
+    sudo sed -i 's|^\s*# boot.kernelPackages = pkgs.linuxPackages_cachyos;|boot.kernelPackages = pkgs.linuxPackages_cachyos;|' "$CONFIG_DIR/modules/gaming/gaming-optimizations.nix"
 else
-    echo "Using CachyOS kernel (default)..."
+    echo "Using NixOS kernel (default)..."
+    # The NixOS kernel is already active by default, so nothing to do
 fi
 
-# Handle optional features
 # Handle virtualization choice
 if [[ $VIRTUALIZATION =~ ^[Nn]$ ]]; then
     echo "Disabling virtualization..."
@@ -211,12 +214,14 @@ else
     echo "Keeping emulation enabled..."
 fi
 
-if [[ $DAVINCI_RESOLVE =~ ^[Nn]$ ]] || [[ -z $DAVINCI_RESOLVE ]]; then
-    echo "Removing DaVinci Resolve from configuration..."
-    # Comment out DaVinci Resolve from home.nix packages
-    sudo sed -i 's|^\s*davinci-resolve|    # davinci-resolve|' "$CONFIG_DIR/home.nix"
+# Handle DaVinci Resolve choice
+if [[ $DAVINCI_RESOLVE =~ ^[Yy]$ ]]; then
+    echo "Enabling DaVinci Resolve in configuration..."
+    # Uncomment DaVinci Resolve in home.nix packages
+    sudo sed -i 's|^\s*# davinci-resolve|    davinci-resolve|' "$CONFIG_DIR/home.nix"
 else
-    echo "Keeping DaVinci Resolve in configuration..."
+    echo "Keeping DaVinci Resolve disabled (default)..."
+    # It's already commented out by default, so nothing to do
 fi
 
 # Preserve the original hardware-configuration.nix
@@ -295,7 +300,7 @@ echo "sudo reboot"
 echo
 echo -e "${YELLOW}Useful commands:${NC}"
 echo "• Rebuild system: sudo nixos-rebuild switch --flake .#$HOSTNAME"
-echo "• Update packages: nix flake update && sudo nixos-rebuild switch --flake .#$HOSTNAME"  
+echo "• Update packages: nix flake update && sudo nixos-rebuild switch --flake .#$HOSTNAME"
 echo "• Rollback if needed: sudo nixos-rebuild switch --rollback"
 echo
 echo -e "${YELLOW}Configuration files location:${NC}"
