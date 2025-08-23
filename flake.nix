@@ -7,10 +7,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     #Lanzaboote for secure boot, delete if unwanted
-    # lanzaboote = {
-      # url = "github:nix-community/lanzaboote/v0.4.2";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Declarative flaptak config
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
@@ -29,7 +29,7 @@
     {
       self,
       nixpkgs,
-      # lanzaboote,  # delete if you don't want secure boot
+      lanzaboote,  # delete if you don't want secure boot
       nix-flatpak,
       home-manager,
       chaotic,
