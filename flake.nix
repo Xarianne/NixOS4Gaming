@@ -8,7 +8,7 @@
 
     # Lanzaboote for secure boot, uncomment the 4 lines below if wanted, otherwise delete
     # lanzaboote = {
-      # url = "github:nix-community/lanzaboote/v0.4.2";
+      # url = "github:nix-community/lanzaboote/v0.4.2";  # <--- This version might change, check https://github.com/nix-community/lanzaboote for the latest version
       # inputs.nixpkgs.follows = "nixpkgs";
     # };
 
